@@ -326,59 +326,59 @@ export default function EngineeringDesignSolutions() {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <motion.div
-                variants={item}
-                className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4"
-              >
-                <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8]">
-                  <Shield className="h-8 w-8" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Safety Rating</p>
-                  <h3 className="text-2xl font-bold text-[#0a192f]">5-Star</h3>
-                  <p className="text-[#0046b8] text-sm font-medium">AU-NCAP Rating</p>
-                </div>
-              </motion.div>
-
-              <motion.div
-                variants={item}
-                className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4"
-              >
-                <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8]">
-                  <Clock className="h-8 w-8" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Process Efficiency</p>
-                  <h3 className="text-2xl font-bold text-[#0a192f]">90%</h3>
-                  <p className="text-[#0046b8] text-sm font-medium">Lead Time Reduction</p>
+              {/* First metric box */}
+              <motion.div variants={item} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                <div className="flex flex-col items-center sm:items-center md:items-start lg:items-start">
+                  <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8] mb-4 sm:mb-4 md:mb-0 md:mr-4">
+                    <Shield className="h-8 w-8" />
+                  </div>
+                  <div className="text-center sm:text-center md:text-left">
+                    <p className="text-sm text-gray-500">Safety Rating</p>
+                    <h3 className="text-2xl font-bold text-[#0a192f]">5-Star</h3>
+                    <p className="text-[#0046b8] text-sm font-medium">AU-NCAP Rating</p>
+                  </div>
                 </div>
               </motion.div>
 
-              <motion.div
-                variants={item}
-                className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4"
-              >
-                <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8]">
-                  <Award className="h-8 w-8" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Recognition</p>
-                  <h3 className="text-2xl font-bold text-[#0a192f]">2019</h3>
-                  <p className="text-[#0046b8] text-sm font-medium">Toyota Quality Award</p>
+              {/* Second metric box */}
+              <motion.div variants={item} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                <div className="flex flex-col items-center sm:items-center md:items-start lg:items-start">
+                  <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8] mb-4 sm:mb-4 md:mb-0 md:mr-4">
+                    <Clock className="h-8 w-8" />
+                  </div>
+                  <div className="text-center sm:text-center md:text-left">
+                    <p className="text-sm text-gray-500">Process Efficiency</p>
+                    <h3 className="text-2xl font-bold text-[#0a192f]">90%</h3>
+                    <p className="text-[#0046b8] text-sm font-medium">Lead Time Reduction</p>
+                  </div>
                 </div>
               </motion.div>
 
-              <motion.div
-                variants={item}
-                className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4"
-              >
-                <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8]">
-                  <DollarSign className="h-8 w-8" />
+              {/* Third metric box */}
+              <motion.div variants={item} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                <div className="flex flex-col items-center sm:items-center md:items-start lg:items-start">
+                  <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8] mb-4 sm:mb-4 md:mb-0 md:mr-4">
+                    <Award className="h-8 w-8" />
+                  </div>
+                  <div className="text-center sm:text-center md:text-left">
+                    <p className="text-sm text-gray-500">Recognition</p>
+                    <h3 className="text-2xl font-bold text-[#0a192f]">2019</h3>
+                    <p className="text-[#0046b8] text-sm font-medium">Toyota Quality Award</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm text-gray-500">Annual Savings</p>
-                  <h3 className="text-2xl font-bold text-[#0a192f]">$57K</h3>
-                  <p className="text-[#0046b8] text-sm font-medium">VBA Automation</p>
+              </motion.div>
+
+              {/* Fourth metric box */}
+              <motion.div variants={item} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                <div className="flex flex-col items-center sm:items-center md:items-start lg:items-start">
+                  <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8] mb-4 sm:mb-4 md:mb-0 md:mr-4">
+                    <DollarSign className="h-8 w-8" />
+                  </div>
+                  <div className="text-center sm:text-center md:text-left">
+                    <p className="text-sm text-gray-500">Annual Savings</p>
+                    <h3 className="text-2xl font-bold text-[#0a192f]">$57K</h3>
+                    <p className="text-[#0046b8] text-sm font-medium">VBA Automation</p>
+                  </div>
                 </div>
               </motion.div>
             </motion.div>

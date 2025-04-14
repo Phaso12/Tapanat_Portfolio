@@ -339,43 +339,49 @@ export default function ADOTNFTMarketplace() {
             >
               <motion.div
                 variants={item}
-                className="bg-white p-4 sm:p-5 md:p-6 rounded-lg shadow-sm border border-gray-100 flex items-center gap-3 sm:gap-4 hover:shadow-md transition-shadow duration-300"
+                className="bg-white p-4 sm:p-5 md:p-6 rounded-lg shadow-sm border border-gray-100"
               >
-                <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8]">
-                  <Users className="h-8 w-8" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Active Users</p>
-                  <h3 className="text-2xl font-bold text-[#0a192f]">25,000+</h3>
-                  <p className="text-[#0046b8] text-sm font-medium">+230% Growth</p>
+                <div className="flex flex-col items-center sm:items-center md:items-start lg:items-start">
+                  <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8] mb-4 sm:mb-4 md:mb-0 md:mr-4">
+                    <Users className="h-8 w-8" />
+                  </div>
+                  <div className="text-center sm:text-center md:text-left">
+                    <p className="text-sm text-gray-500">Active Users</p>
+                    <h3 className="text-2xl font-bold text-[#0a192f]">25,000+</h3>
+                    <p className="text-[#0046b8] text-sm font-medium">+230% Growth</p>
+                  </div>
                 </div>
               </motion.div>
 
               <motion.div
                 variants={item}
-                className="bg-white p-4 sm:p-5 md:p-6 rounded-lg shadow-sm border border-gray-100 flex items-center gap-3 sm:gap-4 hover:shadow-md transition-shadow duration-300"
+                className="bg-white p-4 sm:p-5 md:p-6 rounded-lg shadow-sm border border-gray-100"
               >
-                <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8]">
-                  <TrendingUp className="h-8 w-8" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Engagement Time</p>
-                  <h3 className="text-2xl font-bold text-[#0a192f]">+810%</h3>
-                  <p className="text-[#0046b8] text-sm font-medium">in 3 months</p>
+                <div className="flex flex-col items-center sm:items-center md:items-start lg:items-start">
+                  <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8] mb-4 sm:mb-4 md:mb-0 md:mr-4">
+                    <TrendingUp className="h-8 w-8" />
+                  </div>
+                  <div className="text-center sm:text-center md:text-left">
+                    <p className="text-sm text-gray-500">Engagement Time</p>
+                    <h3 className="text-2xl font-bold text-[#0a192f]">+810%</h3>
+                    <p className="text-[#0046b8] text-sm font-medium">in 3 months</p>
+                  </div>
                 </div>
               </motion.div>
 
               <motion.div
                 variants={item}
-                className="bg-white p-4 sm:p-5 md:p-6 rounded-lg shadow-sm border border-gray-100 flex items-center gap-3 sm:gap-4 hover:shadow-md transition-shadow duration-300"
+                className="bg-white p-4 sm:p-5 md:p-6 rounded-lg shadow-sm border border-gray-100"
               >
-                <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8]">
-                  <Clock className="h-8 w-8" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Development Time</p>
-                  <h3 className="text-2xl font-bold text-[#0a192f]">1 Year</h3>
-                  <p className="text-[#0046b8] text-sm font-medium">from concept to launch</p>
+                <div className="flex flex-col items-center sm:items-center md:items-start lg:items-start">
+                  <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8] mb-4 sm:mb-4 md:mb-0 md:mr-4">
+                    <Clock className="h-8 w-8" />
+                  </div>
+                  <div className="text-center sm:text-center md:text-left">
+                    <p className="text-sm text-gray-500">Development Time</p>
+                    <h3 className="text-2xl font-bold text-[#0a192f]">1 Year</h3>
+                    <p className="text-[#0046b8] text-sm font-medium">from concept to launch</p>
+                  </div>
                 </div>
               </motion.div>
             </motion.div>
