@@ -82,27 +82,65 @@ export default function EngineeringDesignSolutions() {
     { id: "key-insights", name: "Key Insights", icon: <Lightbulb className="h-5 w-5" /> },
   ]
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const sectionElements = sections
-        .map((section) => ({
-          id: section.id,
-          element: document.getElementById(section.id),
-        }))
-        .filter((section) => section.element)
+  // Improved handleScroll function to better detect the last section
+  const handleScroll = () => {
+    const sectionElements = sections
+      .map((section) => ({
+        id: section.id,
+        element: document.getElementById(section.id),
+      }))
+      .filter((section) => section.element)
 
-      const currentPosition = window.scrollY + 100
+    // Get current scroll position plus a small offset to detect sections earlier
+    const currentPosition = window.scrollY + 150
 
-      // Find the last section that is above the current scroll position
-      for (let i = sectionElements.length - 1; i >= 0; i--) {
-        const { id, element } = sectionElements[i]
-        if (element && element.offsetTop <= currentPosition) {
-          setActiveSection(id)
+    // Check if we're near the bottom of the page
+    const isNearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 200
+
+    // If near bottom, set the last section as active
+    if (isNearBottom && sections.length > 0) {
+      setActiveSection(sections[sections.length - 1].id)
+      return
+    }
+
+    // Find the section that is currently in view
+    let currentSection = null
+
+    // First pass: check if any section is directly in view
+    for (let i = 0; i < sectionElements.length; i++) {
+      const { id, element } = sectionElements[i]
+      if (element) {
+        const elementTop = element.offsetTop
+        const elementBottom = elementTop + element.offsetHeight
+
+        // If current scroll position is within this section
+        if (currentPosition >= elementTop && currentPosition < elementBottom) {
+          currentSection = id
           break
         }
       }
     }
 
+    // If no section is directly in view, find the closest one
+    if (!currentSection && sectionElements.length > 0) {
+      // Default to the first section
+      currentSection = sectionElements[0].id
+
+      // Find the section closest to the current position
+      for (let i = 0; i < sectionElements.length; i++) {
+        const { id, element } = sectionElements[i]
+        if (element && element.offsetTop <= currentPosition) {
+          currentSection = id
+        }
+      }
+    }
+
+    if (currentSection) {
+      setActiveSection(currentSection)
+    }
+  }
+
+  useEffect(() => {
     // Initial check on mount
     handleScroll()
 
@@ -123,6 +161,7 @@ export default function EngineeringDesignSolutions() {
     }
   }, [mobileMenuOpen])
 
+  // Improved scrollToSection function to set active section immediately
   const scrollToSection = (id: string) => {
     if (id === "home") {
       window.location.href = "/"
@@ -131,11 +170,15 @@ export default function EngineeringDesignSolutions() {
 
     const element = document.getElementById(id)
     if (element) {
+      // Set active section immediately when clicked
+      setActiveSection(id)
+
+      // Then scroll to the section
       window.scrollTo({
         top: element.offsetTop - 80,
         behavior: "smooth",
       })
-      setActiveSection(id)
+
       setMobileMenuOpen(false)
     }
   }
@@ -326,7 +369,6 @@ export default function EngineeringDesignSolutions() {
               whileInView="visible"
               viewport={{ once: true }}
             >
-              {/* First metric box */}
               <motion.div variants={item} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
                 <div className="flex flex-col items-center sm:items-center md:items-start lg:items-start">
                   <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8] mb-4 sm:mb-4 md:mb-0 md:mr-4">
@@ -340,7 +382,6 @@ export default function EngineeringDesignSolutions() {
                 </div>
               </motion.div>
 
-              {/* Second metric box */}
               <motion.div variants={item} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
                 <div className="flex flex-col items-center sm:items-center md:items-start lg:items-start">
                   <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8] mb-4 sm:mb-4 md:mb-0 md:mr-4">
@@ -354,7 +395,6 @@ export default function EngineeringDesignSolutions() {
                 </div>
               </motion.div>
 
-              {/* Third metric box */}
               <motion.div variants={item} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
                 <div className="flex flex-col items-center sm:items-center md:items-start lg:items-start">
                   <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8] mb-4 sm:mb-4 md:mb-0 md:mr-4">
@@ -368,7 +408,6 @@ export default function EngineeringDesignSolutions() {
                 </div>
               </motion.div>
 
-              {/* Fourth metric box */}
               <motion.div variants={item} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
                 <div className="flex flex-col items-center sm:items-center md:items-start lg:items-start">
                   <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8] mb-4 sm:mb-4 md:mb-0 md:mr-4">
