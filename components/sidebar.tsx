@@ -25,27 +25,33 @@ export default function Sidebar() {
     { id: "certifications", name: "Certifications", icon: <Award className="h-5 w-5" /> },
   ]
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const sectionElements = sections
-        .map((section) => ({
-          id: section.id,
-          element: document.getElementById(section.id),
-        }))
-        .filter((section) => section.element)
+  const handleScroll = () => {
+    const sectionElements = sections
+      .map((section) => ({
+        id: section.id,
+        element: document.getElementById(section.id),
+      }))
+      .filter((section) => section.element)
 
-      const currentPosition = window.scrollY + 100
+    const currentPosition = window.scrollY + window.innerHeight / 3
 
-      // Find the last section that is above the current scroll position
-      for (let i = sectionElements.length - 1; i >= 0; i--) {
-        const { id, element } = sectionElements[i]
-        if (element && element.offsetTop <= currentPosition) {
+    // Find the section that is currently in view
+    for (let i = sectionElements.length - 1; i >= 0; i--) {
+      const { id, element } = sectionElements[i]
+      if (element) {
+        const elementTop = element.offsetTop
+        const elementBottom = elementTop + element.offsetHeight
+
+        // Check if the current position is within the section
+        if (currentPosition >= elementTop && window.scrollY < elementBottom) {
           setActiveSection(id)
           break
         }
       }
     }
+  }
 
+  useEffect(() => {
     // Initial check on mount
     handleScroll()
 
