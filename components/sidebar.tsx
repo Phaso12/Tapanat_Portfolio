@@ -19,7 +19,7 @@ export default function Sidebar() {
 
   // Update the sections array to swap Portfolio and Certifications
   const sections = [
-    { id: "header", name: "About M", icon: <User className="h-5 w-5" /> },
+    { id: "header", name: "About Me", icon: <User className="h-5 w-5" /> },
     { id: "resume", name: "Resume", icon: <FileText className="h-5 w-5" /> },
     { id: "portfolio", name: "Portfolio", icon: <Briefcase className="h-5 w-5" /> },
     { id: "certifications", name: "Certifications", icon: <Award className="h-5 w-5" /> },
