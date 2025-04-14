@@ -328,9 +328,9 @@ export default function EngineeringDesignSolutions() {
             >
               <motion.div
                 variants={item}
-                className="bg-white p-4 sm:p-5 md:p-6 rounded-lg shadow-sm border border-gray-100 flex items-center gap-3 sm:gap-3 md:gap-4 h-full"
+                className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4"
               >
-                <div className="p-2 sm:p-2.5 md:p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8] flex-shrink-0">
+                <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8]">
                   <Shield className="h-8 w-8" />
                 </div>
                 <div>
@@ -342,9 +342,9 @@ export default function EngineeringDesignSolutions() {
 
               <motion.div
                 variants={item}
-                className="bg-white p-4 sm:p-5 md:p-6 rounded-lg shadow-sm border border-gray-100 flex items-center gap-3 sm:gap-3 md:gap-4 h-full"
+                className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4"
               >
-                <div className="p-2 sm:p-2.5 md:p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8] flex-shrink-0">
+                <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8]">
                   <Clock className="h-8 w-8" />
                 </div>
                 <div>
@@ -356,9 +356,9 @@ export default function EngineeringDesignSolutions() {
 
               <motion.div
                 variants={item}
-                className="bg-white p-4 sm:p-5 md:p-6 rounded-lg shadow-sm border border-gray-100 flex items-center gap-3 sm:gap-3 md:gap-4 h-full"
+                className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4"
               >
-                <div className="p-2 sm:p-2.5 md:p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8] flex-shrink-0">
+                <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8]">
                   <Award className="h-8 w-8" />
                 </div>
                 <div>
@@ -370,9 +370,9 @@ export default function EngineeringDesignSolutions() {
 
               <motion.div
                 variants={item}
-                className="bg-white p-4 sm:p-5 md:p-6 rounded-lg shadow-sm border border-gray-100 flex items-center gap-3 sm:gap-3 md:gap-4 h-full"
+                className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex items-center gap-4"
               >
-                <div className="p-2 sm:p-2.5 md:p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8] flex-shrink-0">
+                <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8]">
                   <DollarSign className="h-8 w-8" />
                 </div>
                 <div>
