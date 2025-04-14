@@ -239,7 +239,7 @@ export default function CryptoAlgorithmicTrading() {
             </div>
             <h1 className="text-xl font-bold text-center">Tapanat Chaigosi</h1>
             <div className="mt-2 pt-2 border-t border-[#ffffff]/50">
-              <p className="text-base text-center text-white font-medium">Algorithmic Trading</p>
+              <p className="text-base text-center text-white font-medium">Cryptocurrency Algorithmic Trading</p>
             </div>
           </div>
 
@@ -288,7 +288,7 @@ export default function CryptoAlgorithmicTrading() {
           <div className="mb-8">
             <h1 className="text-lg font-bold text-center">Tapanat Chaigosi</h1>
             <div className="mt-2 pt-2 border-t border-[#ffffff]/50">
-              <p className="text-base text-center text-white font-medium">Algorithmic Trading</p>
+              <p className="text-base text-center text-white font-medium">Cryptoccurrency Algorithmic Trading</p>
             </div>
           </div>
 
