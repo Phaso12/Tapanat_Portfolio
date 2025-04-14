@@ -166,13 +166,7 @@ export default function Portfolio() {
                 </div>
                 <div className="p-4 sm:p-5 md:p-6 flex-grow flex flex-col">
                   {/* Fixed height container for title with reduced height */}
-                  <div
-                    className={`h-12 ${
-                      project.slug === "crypto-algorithmic-trading" || project.slug === "engineering-design-solutions"
-                        ? "mb-4 lg:mb-0"
-                        : "mb-0"
-                    }`}
-                  >
+                  <div className="h-12 mb-0">
                     <h3 className="text-xl font-bold text-[#0a192f] group-hover:text-[#0046b8] transition-colors duration-300">
                       {project.title}
                     </h3>
@@ -278,7 +272,13 @@ export default function Portfolio() {
                 </div>
                 <div className="p-6 flex-grow flex flex-col">
                   {/* Fixed height container for title with reduced height */}
-                  <div className={`h-12 ${project.slug === "crypto-algorithmic-trading" ? "mb-4 lg:mb-0" : "mb-0"}`}>
+                  <div
+                    className={`h-12 ${
+                      project.slug === "crypto-algorithmic-trading" || project.slug === "engineering-design-solutions"
+                        ? "mb-4 lg:mb-0"
+                        : "mb-0"
+                    }`}
+                  >
                     <h3 className="text-xl font-bold text-[#0a192f] group-hover:text-[#0046b8] transition-colors duration-300">
                       {project.title}
                     </h3>

@@ -76,7 +76,7 @@ export default function GraphModal({ isOpen, graphUrl, onClose }: GraphModalProp
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
             transition={{ type: "spring", damping: 20, stiffness: 300 }}
-            className="relative bg-white rounded-xl overflow-hidden max-w-[90%] sm:max-w-[85%] md:max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] shadow-2xl"
+            className="relative bg-white rounded-xl overflow-hidden w-full max-w-4xl max-h-[95vh] sm:max-h-[90vh] shadow-2xl"
           >
             <button
               onClick={onClose}
@@ -87,12 +87,12 @@ export default function GraphModal({ isOpen, graphUrl, onClose }: GraphModalProp
             </button>
 
             <div className="overflow-auto max-h-[95vh] sm:max-h-[90vh]">
-              <div className="relative w-full h-[50vh] sm:h-[55vh] md:h-[70vh] lg:h-[80vh]">
+              <div className="relative w-full h-[50vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh]">
                 <Image
                   src={graphUrl || "/placeholder.svg"}
                   alt="Trading Graph"
                   fill
-                  className="object-contain p-2 sm:p-3 md:p-4"
+                  className="object-contain p-2 sm:p-4"
                   priority
                 />
               </div>
