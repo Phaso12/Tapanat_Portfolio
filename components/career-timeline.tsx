@@ -2,7 +2,7 @@
 
 import React from "react"
 import { motion } from "framer-motion"
-import { GraduationCap, Briefcase, ChevronLeft, ChevronRight } from "lucide-react"
+import { GraduationCap, Briefcase } from "lucide-react"
 import { useState, useEffect } from "react"
 
 const timelineEvents = [
@@ -283,18 +283,7 @@ const CareerTimeline: React.FC = () => {
         </div>
       )}
 
-      {/* Navigation arrows for mobile */}
-      {showLeftArrow && (
-        <div style={{ ...navArrowStyle, left: "10px" }} onClick={() => scroll("left")} className="md:hidden">
-          <ChevronLeft className="h-6 w-6 text-[#0046b8]" />
-        </div>
-      )}
-
-      {showRightArrow && (
-        <div style={{ ...navArrowStyle, right: "10px" }} onClick={() => scroll("right")} className="md:hidden">
-          <ChevronRight className="h-6 w-6 text-[#0046b8]" />
-        </div>
-      )}
+      {/* Navigation arrows removed */}
 
       <div className="relative">
         <div
