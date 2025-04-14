@@ -33,27 +33,65 @@ export default function FormingProductStrategy() {
     window.scrollTo(0, 0)
   }, [])
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const sectionElements = sections
-        .map((section) => ({
-          id: section.id,
-          element: document.getElementById(section.id),
-        }))
-        .filter((section) => section.element)
+  // Improved handleScroll function to better detect the last section
+  const handleScroll = () => {
+    const sectionElements = sections
+      .map((section) => ({
+        id: section.id,
+        element: document.getElementById(section.id),
+      }))
+      .filter((section) => section.element)
 
-      const currentPosition = window.scrollY + 100
+    // Get current scroll position plus a small offset to detect sections earlier
+    const currentPosition = window.scrollY + 150
 
-      // Find the last section that is above the current scroll position
-      for (let i = sectionElements.length - 1; i >= 0; i--) {
-        const { id, element } = sectionElements[i]
-        if (element && element.offsetTop <= currentPosition) {
-          setActiveSection(id)
+    // Check if we're near the bottom of the page
+    const isNearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 200
+
+    // If near bottom, set the last section as active
+    if (isNearBottom && sections.length > 0) {
+      setActiveSection(sections[sections.length - 1].id)
+      return
+    }
+
+    // Find the section that is currently in view
+    let currentSection = null
+
+    // First pass: check if any section is directly in view
+    for (let i = 0; i < sectionElements.length; i++) {
+      const { id, element } = sectionElements[i]
+      if (element) {
+        const elementTop = element.offsetTop
+        const elementBottom = elementTop + element.offsetHeight
+
+        // If current scroll position is within this section
+        if (currentPosition >= elementTop && currentPosition < elementBottom) {
+          currentSection = id
           break
         }
       }
     }
 
+    // If no section is directly in view, find the closest one
+    if (!currentSection && sectionElements.length > 0) {
+      // Default to the first section
+      currentSection = sectionElements[0].id
+
+      // Find the section closest to the current position
+      for (let i = 0; i < sectionElements.length; i++) {
+        const { id, element } = sectionElements[i]
+        if (element && element.offsetTop <= currentPosition) {
+          currentSection = id
+        }
+      }
+    }
+
+    if (currentSection) {
+      setActiveSection(currentSection)
+    }
+  }
+
+  useEffect(() => {
     // Initial check on mount
     handleScroll()
 
@@ -74,7 +112,7 @@ export default function FormingProductStrategy() {
     }
   }, [mobileMenuOpen])
 
-  // Update the scrollToSection function to handle the Home link
+  // Improved scrollToSection function to set active section immediately
   const scrollToSection = (id: string) => {
     if (id === "home") {
       window.location.href = "/"
@@ -83,11 +121,15 @@ export default function FormingProductStrategy() {
 
     const element = document.getElementById(id)
     if (element) {
+      // Set active section immediately when clicked
+      setActiveSection(id)
+
+      // Then scroll to the section
       window.scrollTo({
         top: element.offsetTop - 80,
         behavior: "smooth",
       })
-      setActiveSection(id)
+
       setMobileMenuOpen(false)
     }
   }
@@ -332,13 +374,13 @@ export default function FormingProductStrategy() {
 
                 <div className="relative z-10">
                   <p className="text-gray-700 mb-6">
-                    Throughout my career, I’ve built and strengthened key soft skills that have played a major role in
+                    Throughout my career, I've built and strengthened key soft skills that have played a major role in
                     delivering successful results across different industries. Skills like leadership, cross-functional
                     collaboration, critical thinking, and problem-solving have helped me navigate complex challenges and
                     find practical, effective solutions.
                   </p>
                   <p className="text-gray-700">
-                    Below are real examples from past projects that show how I’ve applied these skills in action. Each
+                    Below are real examples from past projects that show how I've applied these skills in action. Each
                     one reflects my ability to adapt to new environments, work closely with different teams, and
                     consistently drive meaningful outcomes
                   </p>
