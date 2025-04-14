@@ -25,6 +25,7 @@ export default function Sidebar() {
     { id: "certifications", name: "Certifications", icon: <Award className="h-5 w-5" /> },
   ]
 
+  // Update the handleScroll function to properly detect the Certifications section
   const handleScroll = () => {
     const sectionElements = sections
       .map((section) => ({
@@ -33,21 +34,52 @@ export default function Sidebar() {
       }))
       .filter((section) => section.element)
 
-    const currentPosition = window.scrollY + window.innerHeight / 3
+    // Get current scroll position plus a small offset to detect sections earlier
+    const currentPosition = window.scrollY + 150
+
+    // Check if we're near the bottom of the page
+    const isNearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100
+
+    // If near bottom and certifications section exists, set it as active
+    if (isNearBottom && document.getElementById("certifications")) {
+      setActiveSection("certifications")
+      return
+    }
 
     // Find the section that is currently in view
-    for (let i = sectionElements.length - 1; i >= 0; i--) {
+    let currentSection = null
+
+    // First pass: check if any section is directly in view
+    for (let i = 0; i < sectionElements.length; i++) {
       const { id, element } = sectionElements[i]
       if (element) {
         const elementTop = element.offsetTop
         const elementBottom = elementTop + element.offsetHeight
 
-        // Check if the current position is within the section
-        if (currentPosition >= elementTop && window.scrollY < elementBottom) {
-          setActiveSection(id)
+        // If current scroll position is within this section
+        if (currentPosition >= elementTop && currentPosition < elementBottom) {
+          currentSection = id
           break
         }
       }
+    }
+
+    // If no section is directly in view, find the closest one
+    if (!currentSection && sectionElements.length > 0) {
+      // Default to the first section
+      currentSection = sectionElements[0].id
+
+      // Find the section closest to the current position
+      for (let i = 0; i < sectionElements.length; i++) {
+        const { id, element } = sectionElements[i]
+        if (element && element.offsetTop <= currentPosition) {
+          currentSection = id
+        }
+      }
+    }
+
+    if (currentSection) {
+      setActiveSection(currentSection)
     }
   }
 
@@ -74,14 +106,19 @@ export default function Sidebar() {
     }
   }, [mobileMenuOpen])
 
+  // Make sure the scrollToSection function also works correctly
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
+      // Set active section immediately when clicked
+      setActiveSection(id)
+
+      // Then scroll to the section
       window.scrollTo({
         top: element.offsetTop - 80,
         behavior: "smooth",
       })
-      setActiveSection(id)
+
       setMobileMenuOpen(false)
     }
   }
