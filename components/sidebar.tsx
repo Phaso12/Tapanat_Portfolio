@@ -8,6 +8,9 @@ import { Button } from "@/components/ui/button"
 import { Mail, Menu, X, User, MapPin, Phone, Award, FileText, Briefcase } from "lucide-react"
 import { cn } from "@/lib/utils"
 
+// Import the constants at the top of the file
+import { SITE_METADATA, COLORS } from "@/lib/constants"
+
 export default function Sidebar() {
   const [activeSection, setActiveSection] = useState("header")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -190,7 +193,7 @@ export default function Sidebar() {
                 }}
               />
             </div>
-            <h1 className="text-xl font-bold text-center">Tapanat Chaigosi</h1>
+            <h1 className="text-xl font-bold text-center">{SITE_METADATA.name}</h1>
             <div className="mt-2 pt-2 border-t border-[#ffffff]/50">
               <p className="text-sm text-center text-white font-medium">Product Owner & Manager | FinTech Specialist</p>
             </div>
@@ -222,22 +225,25 @@ export default function Sidebar() {
                 <span className="text-sm">Khlong Chan, Bangkapi, Bangkok</span>
               </a>
               <a
-                href="mailto:w.tapanat@gmail.com"
+                href={`mailto:${SITE_METADATA.email}`}
                 className="flex items-center gap-3 text-gray-300 hover:text-white px-2 group"
               >
                 <div className="p-2 rounded-lg bg-[#172a46] group-hover:bg-[#172a46]/80 transition-colors duration-300">
                   <Mail className="h-4 w-4 text-white group-hover:scale-110 transition-transform duration-300" />
                 </div>
-                <span className="text-sm">w.tapanat@gmail.com</span>
+                <span className="text-sm">{SITE_METADATA.email}</span>
               </a>
-              <a href="tel:+66835356641" className="flex items-center gap-3 text-gray-300 hover:text-white px-2 group">
+              <a
+                href={`tel:${SITE_METADATA.phone}`}
+                className="flex items-center gap-3 text-gray-300 hover:text-white px-2 group"
+              >
                 <div className="p-2 rounded-lg bg-[#172a46] group-hover:bg-[#172a46]/80 transition-colors duration-300">
                   <Phone className="h-4 w-4 text-white group-hover:scale-110 transition-transform duration-300" />
                 </div>
-                <span className="text-sm">+66-83-535-6641</span>
+                <span className="text-sm">{SITE_METADATA.phone}</span>
               </a>
               <a
-                href="https://www.linkedin.com/in/tapanat-chaigosi-7995ab200/"
+                href={SITE_METADATA.socialLinks.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-gray-300 hover:text-white px-2 group"
@@ -262,7 +268,7 @@ export default function Sidebar() {
       <aside
         ref={sidebarRef}
         className={cn(
-          "fixed inset-0 bg-gradient-to-b from-[#0a192f] to-[#0a192f] text-white z-40 transition-transform duration-300 ease-in-out md:hidden",
+          `fixed inset-0 bg-gradient-to-b from-[${COLORS.secondary.main}] to-[${COLORS.secondary.main}] text-white z-40 transition-transform duration-300 ease-in-out md:hidden`,
           mobileMenuOpen ? "translate-x-0" : "-translate-x-full",
         )}
         onTouchStart={handleTouchStart}
@@ -272,7 +278,7 @@ export default function Sidebar() {
         <div className="p-6">
           <div className="mb-8">
             {/* Profile image removed from mobile sidebar as it's shown in the main page */}
-            <h1 className="text-lg font-bold text-center">Tapanat Chaigosi</h1>
+            <h1 className="text-lg font-bold text-center">{SITE_METADATA.name}</h1>
             <div className="mt-2 pt-2 border-t border-[#ffffff]/50">
               <p className="text-sm text-center text-white font-medium">Product Owner & Manager | FinTech Specialist</p>
             </div>
@@ -304,22 +310,25 @@ export default function Sidebar() {
                 <span className="text-sm">Khlong Chan, Bangkapi, Bangkok</span>
               </a>
               <a
-                href="mailto:w.tapanat@gmail.com"
+                href={`mailto:${SITE_METADATA.email}`}
                 className="flex items-center gap-3 text-gray-300 hover:text-white px-2 group"
               >
                 <div className="p-2 rounded-lg bg-[#172a46] group-hover:bg-[#172a46]/80 transition-colors duration-300">
                   <Mail className="h-4 w-4 text-white group-hover:scale-110 transition-transform duration-300" />
                 </div>
-                <span className="text-sm">w.tapanat@gmail.com</span>
+                <span className="text-sm">{SITE_METADATA.email}</span>
               </a>
-              <a href="tel:+66835356641" className="flex items-center gap-3 text-gray-300 hover:text-white px-2 group">
+              <a
+                href={`tel:${SITE_METADATA.phone}`}
+                className="flex items-center gap-3 text-gray-300 hover:text-white px-2 group"
+              >
                 <div className="p-2 rounded-lg bg-[#172a46] group-hover:bg-[#172a46]/80 transition-colors duration-300">
                   <Phone className="h-4 w-4 text-white group-hover:scale-110 transition-transform duration-300" />
                 </div>
-                <span className="text-sm">+66-83-535-6641</span>
+                <span className="text-sm">{SITE_METADATA.phone}</span>
               </a>
               <a
-                href="https://www.linkedin.com/in/tapanat-chaigosi-7995ab200/"
+                href={SITE_METADATA.socialLinks.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 text-gray-300 hover:text-white px-2 group"

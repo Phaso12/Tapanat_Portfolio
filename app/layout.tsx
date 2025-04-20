@@ -4,34 +4,34 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import Script from "next/script"
 
+// Import the constants at the top of the file
+import { SITE_METADATA } from "@/lib/constants"
+
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Tapanat Chaigosi | Product Owner",
-  description:
-    "I'm Tapanat, a product owner with a strong focus on building scalable systems at the intersection of finance and technology.",
+  title: `${SITE_METADATA.name} | ${SITE_METADATA.title}`,
+  description: SITE_METADATA.description,
   openGraph: {
-    title: "Tapanat Chaigosi | Product Owner",
-    description:
-      "I'm Tapanat, a product owner with a strong focus on building scalable systems at the intersection of finance and technology.",
+    title: `${SITE_METADATA.name} | ${SITE_METADATA.title}`,
+    description: SITE_METADATA.description,
     images: [
       {
         url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Untitled%20design%20%281%29-JuaCwx1dIHOYexfvriHkLeiCCIEHN3.png",
         width: 1200,
         height: 630,
-        alt: "Tapanat Chaigosi",
+        alt: SITE_METADATA.name,
       },
     ],
     url: "https://tapanat-portfolio.vercel.app/",
-    siteName: "Tapanat Chaigosi Portfolio",
+    siteName: `${SITE_METADATA.name} Portfolio`,
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tapanat Chaigosi | Product Owner",
-    description:
-      "I'm Tapanat, a product owner with a strong focus on building scalable systems at the intersection of finance and technology.",
+    title: `${SITE_METADATA.name} | ${SITE_METADATA.title}`,
+    description: SITE_METADATA.description,
     images: [
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Untitled%20design%20%281%29-JuaCwx1dIHOYexfvriHkLeiCCIEHN3.png",
     ],
@@ -66,6 +66,3 @@ export default function RootLayout({
     </html>
   )
 }
-
-
-import './globals.css'

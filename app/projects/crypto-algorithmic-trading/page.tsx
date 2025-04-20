@@ -22,7 +22,8 @@ import {
   Users,
   Home,
 } from "lucide-react"
-import { TRADING_PROFIT } from "@/lib/constants"
+// Import the constants at the top of the file
+import { PERFORMANCE_METRICS, TRADING_PROFIT } from "@/lib/constants"
 import GraphModal from "@/components/graph-modal"
 import { useState, useEffect, useRef } from "react"
 import { cn } from "@/lib/utils"
@@ -407,6 +408,7 @@ export default function CryptoAlgorithmicTrading() {
                 <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8] mb-3">
                   <DollarSign className="h-7 w-7" />
                 </div>
+                {/* Replace hardcoded metrics with constants */}
                 <h3 className="text-3xl font-bold text-[#0046b8]">${formattedTradingProfit}</h3>
                 <p className="text-gray-600 text-sm mt-1">Trading Profit</p>
               </motion.div>
@@ -418,7 +420,9 @@ export default function CryptoAlgorithmicTrading() {
                 <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8] mb-3">
                   <TrendingDown className="h-7 w-7" />
                 </div>
-                <h3 className="text-3xl font-bold text-[#0046b8]">78%</h3>
+                <h3 className="text-3xl font-bold text-[#0046b8]">
+                  {PERFORMANCE_METRICS.cryptoTrading.spreadReduction}
+                </h3>
                 <p className="text-gray-600 text-sm mt-1">Spread Reduction</p>
               </motion.div>
 
@@ -429,7 +433,7 @@ export default function CryptoAlgorithmicTrading() {
                 <div className="p-3 rounded-full bg-[#0046b8]/10 text-[#0046b8] mb-3">
                   <TrendingUp className="h-7 w-7" />
                 </div>
-                <h3 className="text-3xl font-bold text-[#0046b8]">42%</h3>
+                <h3 className="text-3xl font-bold text-[#0046b8]">{PERFORMANCE_METRICS.cryptoTrading.volumeGrowth}</h3>
                 <p className="text-gray-600 text-sm mt-1">Volume Growth</p>
               </motion.div>
             </div>

@@ -4,6 +4,7 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { Award, ExternalLink } from "lucide-react"
 import CertificateModal from "./certificate-modal"
+import { CERTIFICATIONS, COLORS } from "@/lib/constants"
 
 export default function Certifications() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -18,24 +19,6 @@ export default function Certifications() {
     setIsModalOpen(false)
   }
 
-  const certifications = [
-    {
-      title: "Cryptocurrency Algorithmic Trading with Python & Binance",
-      description: "Developed trading bots for Web3 trading.",
-      link: "/images/Crypto.png",
-    },
-    {
-      title: "Ethereum Blockchain Developer with Solidity",
-      description: "Built and deployed smart contracts for Web3 applications.",
-      link: "/images/blockchain.png",
-    },
-    {
-      title: "Quality Award (2019)",
-      description: "Recognized for VBA automation tool, standardized for Toyota saving $57K annually.",
-      link: "/images/Quality Award.png",
-    },
-  ]
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -44,15 +27,15 @@ export default function Certifications() {
       viewport={{ once: true }}
     >
       <div className="flex items-center gap-3 mb-8">
-        <div className="p-2 rounded-lg bg-[#0046b8]/10">
+        <div className={`p-2 rounded-lg bg-[${COLORS.primary.light}]`}>
           <Award className="h-6 w-6 text-[#0046b8]" />
         </div>
-        <h2 className="text-3xl font-bold text-[#0a192f]">Certifications</h2>
+        <h2 className={`text-3xl font-bold text-[${COLORS.text.primary}]`}>Certifications</h2>
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-7 md:p-8">
         <ul className="space-y-4 sm:space-y-5">
-          {certifications.map((cert, index) => (
+          {CERTIFICATIONS.map((cert, index) => (
             <motion.li
               key={index}
               initial={{ opacity: 0, x: -20 }}
@@ -62,7 +45,9 @@ export default function Certifications() {
               className="flex items-start gap-3 sm:gap-4 group"
               whileHover={{ x: 5 }}
             >
-              <div className="p-2 rounded-lg bg-[#0046b8]/10 group-hover:bg-[#0046b8]/20 transition-colors duration-300 mt-1">
+              <div
+                className={`p-2 rounded-lg bg-[${COLORS.primary.light}] group-hover:bg-[#0046b8]/20 transition-colors duration-300 mt-1`}
+              >
                 <Award className="h-5 w-5 text-[#0046b8] group-hover:scale-110 transition-transform duration-300" />
               </div>
               <div className="flex-1">

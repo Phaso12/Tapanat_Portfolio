@@ -4,12 +4,14 @@ import { Button } from "@/components/ui/button"
 import { Download, FileText } from "lucide-react"
 import Image from "next/image"
 
-// Resume data structure
+// Import the constants at the top of the file
+import { SITE_METADATA, COLORS } from "@/lib/constants"
+
+// Replace hardcoded resume data with constants
 const resumeData = {
-  name: "Tapanat Chaigosi",
-  title: "Product Owner",
-  // Convert Google Drive sharing link to direct download link
-  pdfUrl: "https://drive.google.com/file/d/1NfrBAbiREBJkyY_y1MFpu_wwkZjzqAUC/view?usp=sharing",
+  name: SITE_METADATA.name,
+  title: SITE_METADATA.title,
+  pdfUrl: SITE_METADATA.resumeUrl,
   thumbnailPath1: "/Resume_Preview_Page_1.png",
   thumbnailPath2: "/Resume_Preview_Page_2.png",
 }
@@ -31,7 +33,7 @@ export default function Resume() {
         <div className="p-2 rounded-lg bg-[#0046b8]/10">
           <FileText className="h-6 w-6 text-[#0046b8]" />
         </div>
-        <h2 className="text-3xl font-bold text-[#0a192f]">Resume</h2>
+        <h2 className={`text-3xl font-bold text-[${COLORS.text.primary}]`}>Resume</h2>
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 sm:p-7 md:p-8">
@@ -95,7 +97,10 @@ export default function Resume() {
 
           {/* Download Button */}
           <div className="mt-8">
-            <Button onClick={handleDownload} className="bg-[#0046b8] hover:bg-[#003d9e] text-white">
+            <Button
+              onClick={handleDownload}
+              className={`bg-[${COLORS.primary.main}] hover:bg-[${COLORS.primary.dark}] text-white`}
+            >
               <Download className="h-4 w-4 mr-2" />
               Download Complete Resume
             </Button>

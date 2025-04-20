@@ -26,6 +26,9 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 
+// Import the constants at the top of the file
+import { PERFORMANCE_METRICS, COLORS } from "@/lib/constants"
+
 export default function ADOTNFTMarketplace() {
   const [activeSection, setActiveSection] = useState("overview")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -347,8 +350,13 @@ export default function ADOTNFTMarketplace() {
                   </div>
                   <div className="text-center sm:text-center md:text-left">
                     <p className="text-sm text-gray-500">Active Users</p>
-                    <h3 className="text-2xl font-bold text-[#0a192f]">25,000+</h3>
-                    <p className="text-[#0046b8] text-sm font-medium">+230% Growth</p>
+                    {/* Replace hardcoded metrics with constants */}
+                    <h3 className="text-2xl font-bold text-[#0a192f]">
+                      {PERFORMANCE_METRICS.adotNftMarketplace.activeUsers}
+                    </h3>
+                    <p className="text-[#0046b8] text-sm font-medium">
+                      {PERFORMANCE_METRICS.adotNftMarketplace.userGrowth} Growth
+                    </p>
                   </div>
                 </div>
               </motion.div>
@@ -363,7 +371,10 @@ export default function ADOTNFTMarketplace() {
                   </div>
                   <div className="text-center sm:text-center md:text-left">
                     <p className="text-sm text-gray-500">Engagement Time</p>
-                    <h3 className="text-2xl font-bold text-[#0a192f]">+810%</h3>
+                    {/* Replace hardcoded metrics with constants */}
+                    <h3 className="text-2xl font-bold text-[#0a192f]">
+                      {PERFORMANCE_METRICS.adotNftMarketplace.engagementTime}
+                    </h3>
                     <p className="text-[#0046b8] text-sm font-medium">in 3 months</p>
                   </div>
                 </div>
@@ -379,7 +390,10 @@ export default function ADOTNFTMarketplace() {
                   </div>
                   <div className="text-center sm:text-center md:text-left">
                     <p className="text-sm text-gray-500">Development Time</p>
-                    <h3 className="text-2xl font-bold text-[#0a192f]">1 Year</h3>
+                    {/* Replace hardcoded metrics with constants */}
+                    <h3 className="text-2xl font-bold text-[#0a192f]">
+                      {PERFORMANCE_METRICS.adotNftMarketplace.developmentTime}
+                    </h3>
                     <p className="text-[#0046b8] text-sm font-medium">from concept to launch</p>
                   </div>
                 </div>
@@ -402,7 +416,7 @@ export default function ADOTNFTMarketplace() {
                 <div className="absolute -bottom-8 -left-8 w-24 h-24 rounded-full bg-[#0046b8]/5 z-0"></div>
 
                 <h2 className="text-2xl font-bold text-[#0a192f] mb-6 relative z-10 flex items-center">
-                  <span className="bg-[#0046b8] text-white p-2 rounded-lg mr-3">
+                  <span className={`bg-[${COLORS.primary.main}] text-white p-2 rounded-lg mr-3`}>
                     <Users className="h-6 w-6" />
                   </span>
                   My Role
@@ -410,7 +424,7 @@ export default function ADOTNFTMarketplace() {
 
                 <div className="grid md:grid-cols-2 gap-8 relative z-10">
                   <div className="bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-sm">
-                    <h3 className="font-medium text-[#0a192f] mb-4 flex items-center">
+                    <h3 className={`font-medium text-[${COLORS.text.primary}] mb-4 flex items-center`}>
                       <span className="bg-[#0046b8]/10 p-1.5 rounded-md mr-2">
                         <ListChecks className="h-5 w-5 text-[#0046b8]" />
                       </span>
@@ -453,7 +467,7 @@ export default function ADOTNFTMarketplace() {
                   </div>
 
                   <div className="bg-white/80 backdrop-blur-sm p-6 rounded-lg shadow-sm">
-                    <h3 className="font-medium text-[#0a192f] mb-4 flex items-center">
+                    <h3 className={`font-medium text-[${COLORS.text.primary}] mb-4 flex items-center`}>
                       <span className="bg-[#0046b8]/10 p-1.5 rounded-md mr-2">
                         <Award className="h-5 w-5 text-[#0046b8]" />
                       </span>
@@ -505,10 +519,10 @@ export default function ADOTNFTMarketplace() {
                 viewport={{ once: true }}
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 rounded-lg bg-[#0046b8] text-white">
+                  <div className={`p-2 rounded-lg bg-[${COLORS.primary.main}] text-white`}>
                     <Target className="h-6 w-6" />
                   </div>
-                  <h2 className="text-2xl font-bold text-[#0a192f]">Business Challenge</h2>
+                  <h2 className={`text-2xl font-bold text-[${COLORS.text.primary}]`}>Business Challenge</h2>
                 </div>
 
                 <div className="relative">
@@ -636,10 +650,10 @@ export default function ADOTNFTMarketplace() {
                 viewport={{ once: true }}
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 rounded-lg bg-[#0046b8] text-white">
+                  <div className={`p-2 rounded-lg bg-[${COLORS.primary.main}] text-white`}>
                     <Lightbulb className="h-6 w-6" />
                   </div>
-                  <h2 className="text-2xl font-bold text-[#0a192f]">Product Solution</h2>
+                  <h2 className={`text-2xl font-bold text-[${COLORS.text.primary}]`}>Product Solution</h2>
                 </div>
 
                 <div className="space-y-8">
@@ -659,7 +673,7 @@ export default function ADOTNFTMarketplace() {
                         <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#0046b8] text-white font-bold">
                           1
                         </div>
-                        <h3 className="text-xl font-bold text-[#0a192f]">ERC-6551 Dressing Room</h3>
+                        <h3 className={`text-xl font-bold text-[${COLORS.text.primary}]`}>ERC-6551 Dressing Room</h3>
                       </div>
 
                       <p className="text-gray-700 mb-6 ml-11">
@@ -683,7 +697,7 @@ export default function ADOTNFTMarketplace() {
                           </div>
                         </div>
                         <div className="space-y-3 bg-[#f8fafc] p-4 rounded-lg">
-                          <h4 className="font-medium text-[#0a192f] flex items-center">
+                          <h4 className={`font-medium text-[${COLORS.text.primary}] flex items-center`}>
                             <span className="bg-[#0046b8]/10 p-1.5 rounded-md mr-2">
                               <Lightbulb className="h-4 w-4 text-[#0046b8]" />
                             </span>
@@ -739,7 +753,7 @@ export default function ADOTNFTMarketplace() {
                         <div className="flex items-center justify-center w-8 h-8 rounded-full bg-[#0046b8] text-white font-bold">
                           2
                         </div>
-                        <h3 className="text-xl font-bold text-[#0a192f]">Quest & Reward System</h3>
+                        <h3 className={`text-xl font-bold text-[${COLORS.text.primary}]`}>Quest & Reward System</h3>
                       </div>
 
                       <p className="text-gray-700 mb-6 ml-11">
@@ -763,7 +777,7 @@ export default function ADOTNFTMarketplace() {
                           </div>
                         </div>
                         <div className="space-y-3 bg-[#f8fafc] p-4 rounded-lg">
-                          <h4 className="font-medium text-[#0a192f] flex items-center">
+                          <h4 className={`font-medium text-[${COLORS.text.primary}] flex items-center`}>
                             <span className="bg-[#0046b8]/10 p-1.5 rounded-md mr-2">
                               <Lightbulb className="h-4 w-4 text-[#0046b8]" />
                             </span>
@@ -824,10 +838,10 @@ export default function ADOTNFTMarketplace() {
                 viewport={{ once: true }}
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 rounded-lg bg-[#0046b8] text-white">
+                  <div className={`p-2 rounded-lg bg-[${COLORS.primary.main}] text-white`}>
                     <TrendingUp className="h-6 w-6" />
                   </div>
-                  <h2 className="text-2xl font-bold text-[#0a192f]">Results & Business Impact</h2>
+                  <h2 className={`text-2xl font-bold text-[${COLORS.text.primary}]`}>Results & Business Impact</h2>
                 </div>
 
                 <div className="space-y-6">
@@ -846,7 +860,7 @@ export default function ADOTNFTMarketplace() {
                       <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#0046b8]/10 mb-3 group-hover:bg-[#0046b8]/20 transition-colors">
                         <Users className="h-8 w-8 text-[#0046b8]" />
                       </div>
-                      <h3 className="text-3xl font-bold text-[#0046b8]">25K+</h3>
+                      <h3 className={`text-3xl font-bold text-[${COLORS.primary.main}]`}>25K+</h3>
                       <p className="text-gray-700 text-sm">Active Users</p>
                     </motion.div>
                     <motion.div
@@ -856,7 +870,7 @@ export default function ADOTNFTMarketplace() {
                       <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#0046b8]/10 mb-3 group-hover:bg-[#0046b8]/20 transition-colors">
                         <TrendingUp className="h-8 w-8 text-[#0046b8]" />
                       </div>
-                      <h3 className="text-3xl font-bold text-[#0046b8]">230%</h3>
+                      <h3 className={`text-3xl font-bold text-[${COLORS.primary.main}]`}>230%</h3>
                       <p className="text-gray-700 text-sm">User Growth</p>
                     </motion.div>
                     <motion.div
@@ -866,7 +880,7 @@ export default function ADOTNFTMarketplace() {
                       <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#0046b8]/10 mb-3 group-hover:bg-[#0046b8]/20 transition-colors">
                         <Clock className="h-8 w-8 text-[#0046b8]" />
                       </div>
-                      <h3 className="text-3xl font-bold text-[#0046b8]">810%</h3>
+                      <h3 className={`text-3xl font-bold text-[${COLORS.primary.main}]`}>810%</h3>
                       <p className="text-gray-700 text-sm">Engagement Increase</p>
                     </motion.div>
                   </div>
@@ -876,7 +890,7 @@ export default function ADOTNFTMarketplace() {
                       {/* Decorative element */}
                       <div className="absolute -top-10 -right-10 w-20 h-20 rounded-full bg-[#0046b8]/5"></div>
 
-                      <h3 className="text-lg font-bold text-[#0a192f] mb-4 flex items-center">
+                      <h3 className={`text-lg font-bold text-[${COLORS.text.primary}] mb-4 flex items-center`}>
                         <span className="bg-[#0046b8]/10 p-2 rounded-full mr-2">
                           <Award className="h-5 w-5 text-[#0046b8]" />
                         </span>
@@ -910,7 +924,7 @@ export default function ADOTNFTMarketplace() {
               >
                 <Link
                   href="/"
-                  className="bg-[#0046b8] hover:bg-[#003d9e] text-white px-8 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2"
+                  className={`bg-[${COLORS.primary.main}] hover:bg-[#003d9e] text-white px-8 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2`}
                 >
                   <Home className="h-5 w-5" />
                   <span>Home</span>
