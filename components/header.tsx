@@ -4,10 +4,8 @@ import { motion } from "framer-motion"
 import CareerTimeline from "./career-timeline"
 import { Button } from "@/components/ui/button"
 import { FileText } from "lucide-react"
+import { TRADING_PROFIT } from "@/lib/constants"
 import Image from "next/image"
-
-// Import the constants at the top of the file
-import { SITE_METADATA, COLORS, TRADING_PROFIT } from "@/lib/constants"
 
 export default function Header() {
   const scrollToSection = (id: string) => {
@@ -48,20 +46,14 @@ export default function Header() {
       >
         {/* Header Title & Subtitle */}
         <div className="mb-6 sm:mb-7 md:mb-8 text-center">
-          {/* Replace hardcoded name and title with constants */}
-          <h1 className={`text-3xl sm:text-4xl md:text-5xl font-bold text-[${COLORS.text.primary}] tracking-tight`}>
-            {SITE_METADATA.name}
-          </h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0a192f] tracking-tight">Tapanat Chaigosi</h1>
           <hr className="my-3 sm:my-4 mx-auto w-1/3 border border-[#b8b2b2] opacity-60" />
-          <h2
-            className={`text-xl sm:text-2xl md:text-3xl font-medium text-[${COLORS.text.primary}] mb-4 sm:mb-5 md:mb-6`}
-          >
-            {SITE_METADATA.title}
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-medium text-[#0a192f] mb-4 sm:mb-5 md:mb-6">
+            Product Owner
           </h2>
 
           <Button
-            // Replace hardcoded colors with constants
-            className={`bg-[${COLORS.primary.main}] hover:bg-[${COLORS.primary.dark}] text-white px-8 sm:px-10 py-8 sm:py-10 font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1`}
+            className="bg-[#0046b8] hover:bg-[#003d9e] text-white px-8 sm:px-10 py-8 sm:py-10 font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
             onClick={() => scrollToSection("portfolio")}
           >
             <span className="inline-flex items-center gap-3">

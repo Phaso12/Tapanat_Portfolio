@@ -6,7 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import CountUp from "react-countup"
 import { Badge } from "@/components/ui/badge"
-import { TRADING_PROFIT, COUNTUP_DURATION, PROJECTS, COLORS, PERFORMANCE_METRICS } from "@/lib/constants"
+import { TRADING_PROFIT, COUNTUP_DURATION } from "@/lib/constants"
 import { useRef, useState, useEffect } from "react"
 
 export default function Portfolio() {
@@ -31,11 +31,58 @@ export default function Portfolio() {
     }
   }
 
-  // Replace hardcoded portfolio growth percentage with the constant
-  const portfolioGrowthPercentage = PERFORMANCE_METRICS.cryptoTrading.portfolioGrowthPercentage
+  const projects = [
+    {
+      title: <>Web3 Marketplace</>,
+      displayTitle: "ADOT NFT Marketplace", // For alt text and other places where JSX isn't appropriate
+      image: "/images/adot-nft-marketplace.png",
+      slug: "adot-nft-marketplace",
+      featured: true,
+      description:
+        "Shaped product vision and defined feature specs for a gamified digital asset platform. Worked closely with devs to deliver interactive experiences that boosted user engagement.",
+      skills: ["Product Roadmap", "Agile & Scrum", "Sprint Planning", "User-centered", "Backlog Management"],
+    },
+    {
+      title: "Forming Product Strategy",
+      displayTitle: "Forming Product Strategy",
+      image: "/images/forming-product-strategy.png", // Update this line to use the new image
+      slug: "forming-product-strategy",
+      description:
+        "Developed and implemented effective product strategies through cross-functional leadership, stakeholder management, and agile methodologies to drive successful product outcomes.",
+      skills: ["Leadership", "Critical Thinking", "Problem Solving", "Cross-Functional Collaboration"],
+    },
+    {
+      title: "Cryptocurrency Algorithmic Trading",
+      displayTitle: "Cryptocurrency Algorithmic Trading",
+      image: null,
+      customImage: true,
+      slug: "crypto-algorithmic-trading",
+      description:
+        "Gathered requirements and led testing for a Python-based trading bot. Improved liquidity and trade efficiency through smart strategy design.",
+      skills: ["Trading Strategy", "Market Insight", "Risk Management", "Python", "Data Analysis"],
+    },
+    {
+      title: "Engineering Design Solutions",
+      displayTitle: "Engineering Design Solutions",
+      image: "/images/toyota-hilux-crash-test.png",
+      slug: "engineering-design-solutions",
+      description:
+        "Turned user issues into design solutions for vehicle components. Drove process automation that cut lead times and reduced costs.",
+      skills: [
+        "Root Cause Analysis",
+        "Quality Assurance",
+        "Cross-functional Collaboration",
+        "Cost Optimization",
+        "Critical Thinking",
+      ],
+    },
+  ]
 
   // Format the trading profit with commas for fallback display
   const formattedTradingProfit = TRADING_PROFIT.toLocaleString()
+
+  // Portfolio growth percentage
+  const portfolioGrowthPercentage = 36.55
 
   return (
     <motion.div
@@ -45,15 +92,15 @@ export default function Portfolio() {
       viewport={{ once: true }}
     >
       <div className="flex items-center gap-3 mb-8">
-        <div className={`p-2 rounded-lg bg-[${COLORS.primary.light}]`}>
-          <Briefcase className={`h-6 w-6 text-[${COLORS.primary.DEFAULT}]`} />
+        <div className="p-2 rounded-lg bg-[#0046b8]/10">
+          <Briefcase className="h-6 w-6 text-[#0046b8]" />
         </div>
-        <h2 className={`text-3xl font-bold text-[${COLORS.text.primary}]`}>Portfolio</h2>
+        <h2 className="text-3xl font-bold text-[#0a192f]">Portfolio</h2>
       </div>
 
       {/* Desktop layout (3 columns) - now for md and above */}
       <div className="hidden md:grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6">
-        {PROJECTS.map((project, index) => (
+        {projects.map((project, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 20 }}
@@ -126,9 +173,7 @@ export default function Portfolio() {
                         : "mb-0"
                     }`}
                   >
-                    <h3
-                      className={`text-xl font-bold text-[${COLORS.text.primary}] group-hover:text-[#0046b8] transition-colors duration-300`}
-                    >
+                    <h3 className="text-xl font-bold text-[#0a192f] group-hover:text-[#0046b8] transition-colors duration-300">
                       {project.title}
                     </h3>
                   </div>
@@ -139,12 +184,12 @@ export default function Portfolio() {
                   )}
                   <div className="flex-grow flex flex-col">
                     <div>
-                      <p className={`text-sm font-medium text-[${COLORS.text.primary}] mb-2`}>Skills:</p>
+                      <p className="text-sm font-medium text-[#0a192f] mb-2">Skills:</p>
                       <div className="flex flex-wrap gap-2">
                         {project.skills.map((skill, i) => (
                           <Badge
                             key={i}
-                            className={`bg-[${COLORS.primary.light}] text-[${COLORS.primary.DEFAULT}] border-[${COLORS.primary.DEFAULT}]/20 hover:bg-[${COLORS.primary.DEFAULT}]/10 border text-xs font-medium transition-colors duration-300 px-1.5 sm:px-2 py-0.5`}
+                            className="bg-[#0046b8]/5 text-[#0046b8] border-[#0046b8]/20 hover:bg-[#0046b8]/10 border text-xs font-medium transition-colors duration-300 px-1.5 sm:px-2 py-0.5"
                           >
                             {skill}
                           </Badge>
@@ -152,7 +197,7 @@ export default function Portfolio() {
                       </div>
                     </div>
                     <div className="mt-auto pt-6">
-                      <div className="border-portfolio-primary text-portfolio-primary hover:bg-portfolio-primary-light rounded-lg w-full group transition-all duration-300 hover:border-portfolio-primary border py-2 px-4 flex items-center justify-center gap-2">
+                      <div className="border-[#0046b8] text-[#0046b8] hover:bg-[#0046b8]/10 rounded-lg w-full group transition-all duration-300 hover:border-[#0046b8] border py-2 px-4 flex items-center justify-center gap-2">
                         View Project
                         <ExternalLink className="h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
                       </div>
@@ -167,7 +212,7 @@ export default function Portfolio() {
 
       {/* Mobile layout (stacked) */}
       <div className="grid grid-cols-1 gap-6 md:hidden">
-        {PROJECTS.map((project, index) => (
+        {projects.map((project, index) => (
           <motion.div
             key={index}
             initial={{ opacity: 0, y: 20 }}
@@ -234,9 +279,7 @@ export default function Portfolio() {
                 <div className="p-6 flex-grow flex flex-col">
                   {/* Fixed height container for title with reduced height */}
                   <div className={`h-12 ${project.slug === "crypto-algorithmic-trading" ? "mb-4 lg:mb-0" : "mb-0"}`}>
-                    <h3
-                      className={`text-xl font-bold text-[${COLORS.text.primary}] group-hover:text-[#0046b8] transition-colors duration-300`}
-                    >
+                    <h3 className="text-xl font-bold text-[#0a192f] group-hover:text-[#0046b8] transition-colors duration-300">
                       {project.title}
                     </h3>
                   </div>
@@ -247,12 +290,12 @@ export default function Portfolio() {
                   )}
                   <div className="flex-grow flex flex-col">
                     <div>
-                      <p className={`text-sm font-medium text-[${COLORS.text.primary}] mb-2`}>Skills:</p>
+                      <p className="text-sm font-medium text-[#0a192f] mb-2">Skills:</p>
                       <div className="flex flex-wrap gap-2">
                         {project.skills.map((skill, i) => (
                           <Badge
                             key={i}
-                            className={`bg-[${COLORS.primary.light}] text-[${COLORS.primary.DEFAULT}] border-[${COLORS.primary.DEFAULT}]/20 hover:bg-[${COLORS.primary.DEFAULT}]/10 border text-xs font-medium transition-colors duration-300`}
+                            className="bg-[#0046b8]/5 text-[#0046b8] border-[#0046b8]/20 hover:bg-[#0046b8]/10 border text-xs font-medium transition-colors duration-300"
                           >
                             {skill}
                           </Badge>
@@ -260,7 +303,7 @@ export default function Portfolio() {
                       </div>
                     </div>
                     <div className="mt-auto pt-6">
-                      <div className="border-portfolio-primary text-portfolio-primary hover:bg-portfolio-primary-light rounded-lg w-full group transition-all duration-300 hover:border-portfolio-primary border py-2 px-4 flex items-center justify-center gap-2">
+                      <div className="border-[#0046b8] text-[#0046b8] hover:bg-[#0046b8]/10 rounded-lg w-full group transition-all duration-300 hover:border-[#0046b8] border py-2 px-4 flex items-center justify-center gap-2">
                         View Project
                         <ExternalLink className="h-4 w-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
                       </div>

@@ -29,9 +29,6 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
-// Import the constants at the top of the file
-import { PERFORMANCE_METRICS, COLORS } from "@/lib/constants"
-
 export default function EngineeringDesignSolutions() {
   // Scroll to top when component mounts
   useEffect(() => {
@@ -379,9 +376,7 @@ export default function EngineeringDesignSolutions() {
                   </div>
                   <div className="text-center sm:text-center md:text-left">
                     <p className="text-sm text-gray-500">Safety Rating</p>
-                    <h3 className="text-2xl font-bold text-[#0a192f]">
-                      {PERFORMANCE_METRICS.engineeringSolutions.safetyRating}
-                    </h3>
+                    <h3 className="text-2xl font-bold text-[#0a192f]">5-Star</h3>
                     <p className="text-[#0046b8] text-sm font-medium">AU-NCAP Rating</p>
                   </div>
                 </div>
@@ -394,9 +389,7 @@ export default function EngineeringDesignSolutions() {
                   </div>
                   <div className="text-center sm:text-center md:text-left">
                     <p className="text-sm text-gray-500">Process Efficiency</p>
-                    <h3 className="text-2xl font-bold text-[#0a192f]">
-                      {PERFORMANCE_METRICS.engineeringSolutions.processEfficiency}
-                    </h3>
+                    <h3 className="text-2xl font-bold text-[#0a192f]">90%</h3>
                     <p className="text-[#0046b8] text-sm font-medium">Lead Time Reduction</p>
                   </div>
                 </div>
@@ -409,9 +402,7 @@ export default function EngineeringDesignSolutions() {
                   </div>
                   <div className="text-center sm:text-center md:text-left">
                     <p className="text-sm text-gray-500">Recognition</p>
-                    <h3 className="text-2xl font-bold text-[#0a192f]">
-                      {PERFORMANCE_METRICS.engineeringSolutions.awardYear}
-                    </h3>
+                    <h3 className="text-2xl font-bold text-[#0a192f]">2019</h3>
                     <p className="text-[#0046b8] text-sm font-medium">Toyota Quality Award</p>
                   </div>
                 </div>
@@ -424,9 +415,7 @@ export default function EngineeringDesignSolutions() {
                   </div>
                   <div className="text-center sm:text-center md:text-left">
                     <p className="text-sm text-gray-500">Annual Savings</p>
-                    <h3 className="text-2xl font-bold text-[#0a192f]">
-                      {PERFORMANCE_METRICS.engineeringSolutions.annualSavings}
-                    </h3>
+                    <h3 className="text-2xl font-bold text-[#0a192f]">$57K</h3>
                     <p className="text-[#0046b8] text-sm font-medium">VBA Automation</p>
                   </div>
                 </div>
@@ -1143,7 +1132,7 @@ export default function EngineeringDesignSolutions() {
               >
                 <Link
                   href="/"
-                  className={`bg-[${COLORS.primary.main}] hover:bg-[${COLORS.primary.dark}] text-white px-8 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2`}
+                  className="bg-[#0046b8] hover:bg-[#003d9e] text-white px-8 py-3 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center gap-2"
                 >
                   <Home className="h-5 w-5" />
                   <span>Home</span>

@@ -9,9 +9,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { Calendar, Mail, Phone, Send, Linkedin, Github, Twitter } from "lucide-react"
 import Link from "next/link"
 
-// Import the constants at the top of the file
-import { SITE_METADATA, COLORS } from "@/lib/constants"
-
 export default function Contact() {
   // Scroll to top when component mounts
   useEffect(() => {
@@ -125,7 +122,7 @@ export default function Contact() {
 
                   <Button
                     type="submit"
-                    className={`w-full bg-[${COLORS.primary.main}] hover:bg-[${COLORS.primary.hover}]`}
+                    className="w-full bg-[#0046b8] hover:bg-[#0046b8]/90"
                     disabled={formState.loading}
                   >
                     {formState.loading ? (
@@ -173,11 +170,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-medium text-[#0a192f]">Email</h3>
-                    <a
-                      href={`mailto:${SITE_METADATA.email}`}
-                      className={`text-[${COLORS.primary.main}] hover:underline`}
-                    >
-                      {SITE_METADATA.email}
+                    <a href="mailto:w.tapanat@gmail.com" className="text-[#0046b8] hover:underline">
+                      w.tapanat@gmail.com
                     </a>
                   </div>
                 </div>
@@ -188,8 +182,8 @@ export default function Contact() {
                   </div>
                   <div>
                     <h3 className="font-medium text-[#0a192f]">Phone</h3>
-                    <a href={`tel:${SITE_METADATA.phone}`} className={`text-[${COLORS.primary.main}] hover:underline`}>
-                      {SITE_METADATA.phone}
+                    <a href="tel:+66835356641" className="text-[#0046b8] hover:underline">
+                      +66-83-535-6641
                     </a>
                   </div>
                 </div>
@@ -210,28 +204,28 @@ export default function Contact() {
                   <h3 className="font-medium text-[#0a192f] mb-4">Connect on Social Media</h3>
                   <div className="flex gap-4">
                     <a
-                      href={SITE_METADATA.socialLinks.linkedin}
+                      href="https://linkedin.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`p-3 rounded-lg bg-[${COLORS.primary.light}] text-[${COLORS.primary.main}] hover:bg-[${COLORS.primary.light}]/20 transition-colors`}
+                      className="p-3 rounded-lg bg-[#0046b8]/10 text-[#0046b8] hover:bg-[#0046b8]/20 transition-colors"
                     >
                       <Linkedin className="h-6 w-6" />
                       <span className="sr-only">LinkedIn</span>
                     </a>
                     <a
-                      href={SITE_METADATA.socialLinks.github}
+                      href="https://github.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`p-3 rounded-lg bg-[${COLORS.primary.light}] text-[${COLORS.primary.main}] hover:bg-[${COLORS.primary.light}]/20 transition-colors`}
+                      className="p-3 rounded-lg bg-[#0046b8]/10 text-[#0046b8] hover:bg-[#0046b8]/20 transition-colors"
                     >
                       <Github className="h-6 w-6" />
                       <span className="sr-only">GitHub</span>
                     </a>
                     <a
-                      href={SITE_METADATA.socialLinks.twitter}
+                      href="https://twitter.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`p-3 rounded-lg bg-[${COLORS.primary.light}] text-[${COLORS.primary.main}] hover:bg-[${COLORS.primary.light}]/20 transition-colors`}
+                      className="p-3 rounded-lg bg-[#0046b8]/10 text-[#0046b8] hover:bg-[#0046b8]/20 transition-colors"
                     >
                       <Twitter className="h-6 w-6" />
                       <span className="sr-only">Twitter</span>

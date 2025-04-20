@@ -5,20 +5,43 @@ import { motion } from "framer-motion"
 import { GraduationCap, Briefcase } from "lucide-react"
 import { useState, useEffect } from "react"
 
-// Import the constants at the top of the file
-import { CAREER_TIMELINE, COLORS } from "@/lib/constants"
-
-// Replace the timelineEvents array with the imported CAREER_TIMELINE constant
-// And add logic to convert the icon string to the actual component
-const timelineEvents = CAREER_TIMELINE.map((event) => ({
-  ...event,
-  icon:
-    event.icon === "GraduationCap" ? (
-      <GraduationCap className="h-6 w-6 text-white" />
-    ) : (
-      <Briefcase className="h-6 w-6 text-white" />
-    ),
-}))
+const timelineEvents = [
+  {
+    year: "2012 - 2016",
+    role: "Bachelor of Automotive Engineering",
+    organization: "Thai-Nichi Institute of Technology",
+    type: "education",
+    icon: <GraduationCap className="h-6 w-6 text-white" />,
+  },
+  {
+    year: "2016 - 2020",
+    role: "Senior Automotive Engineer",
+    organization: "Toyota Motor Asia Pacific",
+    type: "work",
+    icon: <Briefcase className="h-6 w-6 text-white" />,
+  },
+  {
+    year: "2020 - 2022",
+    role: "MSc in Financial Technology",
+    organization: "University of Glasgow",
+    type: "education",
+    icon: <GraduationCap className="h-6 w-6 text-white" />,
+  },
+  {
+    year: "2022 - 2023",
+    role: "FinTech Specialist",
+    organization: "T&B Media Global",
+    type: "work",
+    icon: <Briefcase className="h-6 w-6 text-white" />,
+  },
+  {
+    year: "2023 - Present",
+    role: "Product Owner (Web3)",
+    organization: "VUCA Digital",
+    type: "work",
+    icon: <Briefcase className="h-6 w-6 text-white" />,
+  },
+]
 
 // Animation variants for fade-up
 const fadeUpVariants = {
@@ -80,7 +103,7 @@ const lineStyle: React.CSSProperties = {
   right: "10px", // Adjust right to make space for the arrowhead
   height: "3px",
   // A gradient from darker to lighter navy
-  background: `linear-gradient(to right, #005BE2, ${COLORS.primary.main})`,
+  background: "linear-gradient(to right, #005BE2, #0046b8)",
   zIndex: 1,
 }
 
@@ -168,7 +191,7 @@ const bulletStyle: React.CSSProperties = {
   width: "40px",
   height: "40px",
   borderRadius: "50%",
-  background: `linear-gradient(to bottom, #005BE2, ${COLORS.primary.main})`,
+  background: "linear-gradient(to bottom, #005BE2, #0046b8)",
   marginBottom: "0.5rem",
 }
 
