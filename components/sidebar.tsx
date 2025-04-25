@@ -7,25 +7,27 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Mail, Menu, X, User, MapPin, Phone, Award, FileText, Briefcase } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { SidebarLink } from "@/components/sidebar/sidebar-link"
+import { SidebarContactItem } from "@/components/sidebar/sidebar-contact-item"
+
+// Define section data for reuse
+const sections = [
+  { id: "header", name: "About Me", icon: <User className="h-5 w-5" /> },
+  { id: "resume", name: "Resume", icon: <FileText className="h-5 w-5" /> },
+  { id: "portfolio", name: "Portfolio", icon: <Briefcase className="h-5 w-5" /> },
+  { id: "certifications", name: "Certifications", icon: <Award className="h-5 w-5" /> },
+]
 
 export default function Sidebar() {
   const [activeSection, setActiveSection] = useState("header")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
-  // Add these state variables and refs inside the Sidebar component
+  // Touch handling refs
   const touchStartX = useRef(0)
   const touchEndX = useRef(0)
   const sidebarRef = useRef<HTMLDivElement>(null)
 
-  // Update the sections array to swap Portfolio and Certifications
-  const sections = [
-    { id: "header", name: "About Me", icon: <User className="h-5 w-5" /> },
-    { id: "resume", name: "Resume", icon: <FileText className="h-5 w-5" /> },
-    { id: "portfolio", name: "Portfolio", icon: <Briefcase className="h-5 w-5" /> },
-    { id: "certifications", name: "Certifications", icon: <Award className="h-5 w-5" /> },
-  ]
-
-  // Update the handleScroll function to properly detect the Certifications section
+  // Improved handleScroll function to better detect the last section
   const handleScroll = () => {
     const sectionElements = sections
       .map((section) => ({
@@ -89,11 +91,10 @@ export default function Sidebar() {
 
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [sections])
+  }, [])
 
-  // Add this useEffect after the existing useEffect for scroll handling
+  // Prevent body scrolling when mobile menu is open
   useEffect(() => {
-    // When mobile menu is open, prevent body scrolling
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden"
     } else {
@@ -106,7 +107,7 @@ export default function Sidebar() {
     }
   }, [mobileMenuOpen])
 
-  // Make sure the scrollToSection function also works correctly
+  // Scroll to section function
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
     if (element) {
@@ -123,7 +124,7 @@ export default function Sidebar() {
     }
   }
 
-  // Add this function inside the Sidebar component, before the return statement
+  // Touch handling functions
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX
   }
@@ -198,51 +199,37 @@ export default function Sidebar() {
 
           <nav className="space-y-1">
             {sections.map((section) => (
-              <button
+              <SidebarLink
                 key={section.id}
+                icon={section.icon}
+                label={section.name}
+                isActive={activeSection === section.id}
                 onClick={() => scrollToSection(section.id)}
-                className={cn(
-                  "flex items-center w-full px-3 md:px-4 py-2 md:py-3 rounded-lg transition-colors",
-                  activeSection === section.id ? "bg-[#172a46] text-white" : "text-gray-300 hover:bg-[#172a46]",
-                )}
-              >
-                {section.icon}
-                <span className="ml-2 md:ml-3 text-sm md:text-base">{section.name}</span>
-              </button>
+              />
             ))}
           </nav>
+
           <div className="mt-8 pt-6 border-t border-[#ffffff]/50">
             {/* Desktop Contact Heading */}
             <h3 className="text-sm uppercase mb-4 px-2 text-white">Contact</h3>
             <div className="space-y-3">
-              <a href="#" className="flex items-center gap-3 text-gray-300 hover:text-white px-2 group">
-                <div className="p-2 rounded-lg bg-[#172a46] group-hover:bg-[#172a46]/80 transition-colors duration-300">
-                  <MapPin className="h-4 w-4 text-white group-hover:scale-110 transition-transform duration-300" />
-                </div>
-                <span className="text-sm">Khlong Chan, Bangkapi, Bangkok</span>
-              </a>
-              <a
+              <SidebarContactItem
+                icon={<MapPin className="h-4 w-4 text-white group-hover:scale-110 transition-transform duration-300" />}
+                label="Khlong Chan, Bangkapi, Bangkok"
+                href="#"
+              />
+              <SidebarContactItem
+                icon={<Mail className="h-4 w-4 text-white group-hover:scale-110 transition-transform duration-300" />}
+                label="w.tapanat@gmail.com"
                 href="mailto:w.tapanat@gmail.com"
-                className="flex items-center gap-3 text-gray-300 hover:text-white px-2 group"
-              >
-                <div className="p-2 rounded-lg bg-[#172a46] group-hover:bg-[#172a46]/80 transition-colors duration-300">
-                  <Mail className="h-4 w-4 text-white group-hover:scale-110 transition-transform duration-300" />
-                </div>
-                <span className="text-sm">w.tapanat@gmail.com</span>
-              </a>
-              <a href="tel:+66835356641" className="flex items-center gap-3 text-gray-300 hover:text-white px-2 group">
-                <div className="p-2 rounded-lg bg-[#172a46] group-hover:bg-[#172a46]/80 transition-colors duration-300">
-                  <Phone className="h-4 w-4 text-white group-hover:scale-110 transition-transform duration-300" />
-                </div>
-                <span className="text-sm">+66-83-535-6641</span>
-              </a>
-              <a
-                href="https://www.linkedin.com/in/tapanat-chaigosi-7995ab200/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-gray-300 hover:text-white px-2 group"
-              >
-                <div className="p-2 rounded-lg bg-[#172a46] group-hover:bg-[#172a46]/80 transition-colors duration-300">
+              />
+              <SidebarContactItem
+                icon={<Phone className="h-4 w-4 text-white group-hover:scale-110 transition-transform duration-300" />}
+                label="+66-83-535-6641"
+                href="tel:+66835356641"
+              />
+              <SidebarContactItem
+                icon={
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -250,9 +237,10 @@ export default function Sidebar() {
                   >
                     <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
                   </svg>
-                </div>
-                <span className="text-sm">LinkedIn</span>
-              </a>
+                }
+                label="LinkedIn"
+                href="https://www.linkedin.com/in/tapanat-chaigosi-7995ab200/"
+              />
             </div>
           </div>
         </div>
@@ -280,51 +268,37 @@ export default function Sidebar() {
 
           <nav className="space-y-1">
             {sections.map((section) => (
-              <button
+              <SidebarLink
                 key={section.id}
+                icon={section.icon}
+                label={section.name}
+                isActive={activeSection === section.id}
                 onClick={() => scrollToSection(section.id)}
-                className={cn(
-                  "flex items-center w-full px-4 py-3 rounded-lg transition-colors",
-                  activeSection === section.id ? "bg-[#172a46] text-white" : "text-gray-300 hover:bg-[#172a46]",
-                )}
-              >
-                {section.icon}
-                <span className="ml-3">{section.name}</span>
-              </button>
+              />
             ))}
           </nav>
+
           <div className="mt-6 pt-4 border-t border-[#ffffff]/50">
             {/* Mobile Contact Heading */}
             <h3 className="text-sm uppercase mb-3 px-2 text-white">Contact</h3>
             <div className="space-y-3">
-              <a href="#" className="flex items-center gap-3 text-gray-300 hover:text-white px-2 group">
-                <div className="p-2 rounded-lg bg-[#172a46] group-hover:bg-[#172a46]/80 transition-colors duration-300">
-                  <MapPin className="h-4 w-4 text-white group-hover:scale-110 transition-transform duration-300" />
-                </div>
-                <span className="text-sm">Khlong Chan, Bangkapi, Bangkok</span>
-              </a>
-              <a
+              <SidebarContactItem
+                icon={<MapPin className="h-4 w-4 text-white group-hover:scale-110 transition-transform duration-300" />}
+                label="Khlong Chan, Bangkapi, Bangkok"
+                href="#"
+              />
+              <SidebarContactItem
+                icon={<Mail className="h-4 w-4 text-white group-hover:scale-110 transition-transform duration-300" />}
+                label="w.tapanat@gmail.com"
                 href="mailto:w.tapanat@gmail.com"
-                className="flex items-center gap-3 text-gray-300 hover:text-white px-2 group"
-              >
-                <div className="p-2 rounded-lg bg-[#172a46] group-hover:bg-[#172a46]/80 transition-colors duration-300">
-                  <Mail className="h-4 w-4 text-white group-hover:scale-110 transition-transform duration-300" />
-                </div>
-                <span className="text-sm">w.tapanat@gmail.com</span>
-              </a>
-              <a href="tel:+66835356641" className="flex items-center gap-3 text-gray-300 hover:text-white px-2 group">
-                <div className="p-2 rounded-lg bg-[#172a46] group-hover:bg-[#172a46]/80 transition-colors duration-300">
-                  <Phone className="h-4 w-4 text-white group-hover:scale-110 transition-transform duration-300" />
-                </div>
-                <span className="text-sm">+66-83-535-6641</span>
-              </a>
-              <a
-                href="https://www.linkedin.com/in/tapanat-chaigosi-7995ab200/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 text-gray-300 hover:text-white px-2 group"
-              >
-                <div className="p-2 rounded-lg bg-[#172a46] group-hover:bg-[#172a46]/80 transition-colors duration-300">
+              />
+              <SidebarContactItem
+                icon={<Phone className="h-4 w-4 text-white group-hover:scale-110 transition-transform duration-300" />}
+                label="+66-83-535-6641"
+                href="tel:+66835356641"
+              />
+              <SidebarContactItem
+                icon={
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -332,9 +306,10 @@ export default function Sidebar() {
                   >
                     <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z"></path>
                   </svg>
-                </div>
-                <span className="text-sm">LinkedIn</span>
-              </a>
+                }
+                label="LinkedIn"
+                href="https://www.linkedin.com/in/tapanat-chaigosi-7995ab200/"
+              />
             </div>
           </div>
         </div>
