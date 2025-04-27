@@ -23,11 +23,75 @@ import {
   Home,
 } from "lucide-react"
 import { TRADING_PROFIT } from "@/lib/constants"
-import GraphModal from "@/components/graph-modal"
 import { useState, useEffect, useRef } from "react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+
+interface GraphModalProps {
+  isOpen: boolean
+  graphUrl: string | null
+  onClose: () => void
+}
+
+const GraphModal: React.FC<GraphModalProps> = ({ isOpen, graphUrl, onClose }) => {
+  const modalRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+        onClose()
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside)
+      document.body.style.overflow = "hidden" // Prevent scrolling when the modal is open
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside)
+      document.body.style.overflow = "auto" // Restore scrolling when the modal is closed
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside)
+      document.body.style.overflow = "auto" // Ensure scrolling is restored on unmount
+    }
+  }, [isOpen, onClose])
+
+  if (!isOpen) return null
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-2 sm:p-4 bg-black/80"
+      style={{ backdropFilter: "blur(2px)" }}
+    >
+      <motion.div
+        ref={modalRef}
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        transition={{ type: "spring", damping: 20, stiffness: 300 }}
+        className="relative bg-white rounded-xl overflow-hidden max-w-[90%] sm:max-w-[85%] md:max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] shadow-2xl"
+      >
+        <div className="overflow-auto max-h-[95vh] sm:max-h-[90vh]">
+          <div className="relative w-full h-[50vh] sm:h-[55vh] md:h-[70vh] lg:h-[80vh]">
+            <Image
+              src={graphUrl || "/placeholder.svg"}
+              alt="Trading Graph"
+              fill
+              className="object-contain p-2 sm:p-3 md:p-4"
+              priority
+            />
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  )
+}
 
 export default function CryptoAlgorithmicTrading() {
   // Scroll to top when component mounts

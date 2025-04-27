@@ -107,21 +107,6 @@ const lineStyle: React.CSSProperties = {
   zIndex: 1,
 }
 
-// Add a new function to conditionally apply styles based on screen size
-// const getArrowheadStyle = (isMobile: boolean): React.CSSProperties => {
-//   return {
-//     position: "absolute",
-//     top: "50.5px", // Moved up from 53.5px
-//     right: isMobile ? "5px" : 0, // Move it slightly inward on mobile
-//     width: 0,
-//     height: 0,
-//     borderTop: isMobile ? "4px solid transparent" : "6px solid transparent",
-//     borderBottom: isMobile ? "4px solid transparent" : "6px solid transparent",
-//     borderLeft: isMobile ? "7px solid #0046b8" : "10px solid #0046b8", // Same color as the end of the gradient
-//     zIndex: 1,
-//   }
-// }
-
 // Add tablet-specific styles for the timeline steps
 const stepStyle: React.CSSProperties = {
   position: "relative",
@@ -213,8 +198,8 @@ const navArrowStyle: React.CSSProperties = {
 }
 
 const CareerTimeline: React.FC = () => {
-  const [showLeftArrow, setShowLeftArrow] = useState(false)
-  const [showRightArrow, setShowRightArrow] = useState(true)
+  const [showLeftArrow, setShowRightArrow] = useState(false)
+  const [showRightArrow, setShowLeftArrow] = useState(true)
   const [isScrollable, setIsScrollable] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
 

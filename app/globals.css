@@ -119,7 +119,7 @@ body {
 }
 
 /* Add tablet-specific media queries */
-@media (min-width: 640px) and (max-width: 1023px) {
+@media (min-width: 768px) and (max-width: 1023px) {
   /* Tablet-specific styles */
   .scrollbar-thin {
     scrollbar-width: thin;
@@ -149,7 +149,7 @@ body {
 }
 
 /* Add tablet-specific media queries for the performance metrics boxes */
-@media (min-width: 640px) and (max-width: 1023px) {
+@media (min-width: 768px) and (max-width: 1023px) {
   /* Tablet-specific styles for performance metrics */
   .performance-metrics-box {
     display: flex;
