@@ -56,10 +56,12 @@ const fadeUpVariants = {
 // Update the timeline container for better tablet support
 const containerStyle: React.CSSProperties = {
   width: "100%",
-  maxWidth: "1200px",
+  maxWidth: "100%",
   margin: "0 auto",
-  padding: "0.75rem 0.75rem sm:1rem 1rem",
+  padding: "0.75rem 0.75rem",
   textAlign: "center",
+  overflowX: "hidden",
+  position: "relative", // Added position relative
 }
 
 // Mobile stepper outer style with horizontal scrolling
@@ -68,11 +70,14 @@ const mobileStepperOuterStyle: React.CSSProperties = {
   WebkitOverflowScrolling: "touch",
   scrollbarWidth: "none", // Firefox
   msOverflowStyle: "none", // IE/Edge
+  width: "100%", // Added explicit width
+  display: "block", // Added display block
+  maxWidth: "100vw", // Added max-width
 }
 
 // Desktop stepper outer style without scrolling
 const desktopStepperOuterStyle: React.CSSProperties = {
-  // No overflow properties
+  overflowX: "hidden", // Added overflow-x: hidden
 }
 
 // Mobile stepper container style with minimum width
@@ -81,8 +86,9 @@ const mobileStepperContainerStyle: React.CSSProperties = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "flex-start",
-  minWidth: "800px", // Ensure it's wider than the viewport on mobile
+  minWidth: "800px", // This is likely causing the issue
   paddingBottom: "1.5rem",
+  touchAction: "pan-x", // Added touch-action for better touch handling
 }
 
 // Desktop stepper container style with percentage width
@@ -202,6 +208,7 @@ const CareerTimeline: React.FC = () => {
   const [showRightArrow, setShowLeftArrow] = useState(true)
   const [isScrollable, setIsScrollable] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
 
   // Reference to the scrollable container
   const scrollContainerRef = React.useRef<HTMLDivElement>(null)
@@ -210,12 +217,17 @@ const CareerTimeline: React.FC = () => {
   const checkScrollability = () => {
     const container = scrollContainerRef.current
     if (container) {
-      // Check if we're on mobile
+      // Check if we're on mobile or tablet
       const mobileView = window.innerWidth < 768
-      setIsMobile(mobileView)
+      const tabletView = window.innerWidth >= 768 && window.innerWidth <= 834
+      // Add check for landscape orientation
+      const isLandscape = window.innerHeight < window.innerWidth
 
-      // Only check scrollability on mobile
-      const isContentScrollable = mobileView && container.scrollWidth > container.clientWidth
+      setIsMobile(mobileView)
+      setIsTablet(tabletView)
+
+      // Only check scrollability on mobile or in landscape orientation
+      const isContentScrollable = (mobileView || isLandscape) && container.scrollWidth > container.clientWidth
       setIsScrollable(isContentScrollable)
 
       // Only show arrows if content is scrollable
@@ -241,6 +253,34 @@ const CareerTimeline: React.FC = () => {
     return () => window.removeEventListener("resize", checkScrollability)
   }, [])
 
+  // Add this after the existing useEffect for checkScrollability
+  useEffect(() => {
+    // Special handling for iPad and similar tablet resolutions
+    const handleIPadScrolling = () => {
+      const isIPadResolution =
+        (window.innerWidth === 768 && window.innerHeight === 1024) ||
+        (window.innerWidth === 1024 && window.innerHeight === 768)
+
+      if (isIPadResolution && scrollContainerRef.current) {
+        // Force enable horizontal scrolling for iPad
+        scrollContainerRef.current.style.overflowX = "auto"
+        scrollContainerRef.current.style.WebkitOverflowScrolling = "touch"
+        scrollContainerRef.current.style.maxWidth = "100%"
+        scrollContainerRef.current.style.width = "100%"
+
+        // Make sure the container is wide enough to scroll
+        const innerContainer = scrollContainerRef.current.firstChild as HTMLElement
+        if (innerContainer) {
+          innerContainer.style.minWidth = "800px"
+        }
+      }
+    }
+
+    handleIPadScrolling()
+    window.addEventListener("resize", handleIPadScrolling)
+    return () => window.removeEventListener("resize", handleIPadScrolling)
+  }, [])
+
   // Scroll left or right
   const scroll = (direction: "left" | "right") => {
     const container = scrollContainerRef.current
@@ -257,7 +297,12 @@ const CareerTimeline: React.FC = () => {
   }
 
   return (
-    <section style={containerStyle}>
+    <section
+      style={containerStyle}
+      className={`career-timeline-container ${window.innerHeight < window.innerWidth ? "landscape-mode" : ""} ${
+        window.innerWidth === 768 || window.innerWidth === 1024 ? "ipad-timeline" : ""
+      }`}
+    >
       {/* Add "Full Timeline" heading - only on desktop */}
       {!isMobile && <h3 className="text-base font-medium text-[#0a192f] mb-4 italic">Full Timeline</h3>}
 
@@ -275,9 +320,12 @@ const CareerTimeline: React.FC = () => {
           ref={scrollContainerRef}
           style={isMobile ? mobileStepperOuterStyle : desktopStepperOuterStyle}
           onScroll={handleScroll}
-          className="md:overflow-visible" // Only apply overflow visible on desktop
+          className="md:overflow-hidden" // Changed from overflow-visible to overflow-hidden
         >
-          <div style={isMobile ? mobileStepperContainerStyle : desktopStepperContainerStyle}>
+          <div
+            style={isMobile ? mobileStepperContainerStyle : desktopStepperContainerStyle}
+            className={isTablet ? "tablet-timeline-container" : ""}
+          >
             {/* Horizontal gradient line */}
             <div style={lineStyle}></div>
 

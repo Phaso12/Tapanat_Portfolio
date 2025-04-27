@@ -22,7 +22,7 @@ export default function Header() {
   const formattedTradingProfit = TRADING_PROFIT.toLocaleString()
 
   return (
-    <section id="header" className="pt-6 sm:pt-8 md:pt-10">
+    <section id="header" className="pt-6 sm:pt-8 md:pt-10 overflow-x-hidden">
       {/* Profile Image for Mobile */}
       <div className="md:hidden flex justify-center mb-4 sm:mb-6">
         <div className="relative w-24 sm:w-28 h-24 sm:h-28 rounded-full overflow-hidden border-2 border-[#0046b8]/30">
@@ -43,6 +43,7 @@ export default function Header() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="relative"
+        style={{ maxWidth: "100%" }}
       >
         {/* Header Title & Subtitle */}
         <div className="mb-6 sm:mb-7 md:mb-8 text-center">
@@ -99,7 +100,9 @@ export default function Header() {
             </div>*/}
 
             <div className="mt-2">
-              <CareerTimeline />
+              <div className="ipad-timeline-wrapper">
+                <CareerTimeline />
+              </div>
             </div>
           </div>
         </div>

@@ -15,7 +15,7 @@ export function SidebarLink({ icon, label, isActive, onClick }: SidebarLinkProps
     <button
       onClick={onClick}
       className={cn(
-        "flex items-center w-full px-3 md:px-4 py-2 md:py-3 rounded-lg transition-colors",
+        "flex items-center w-full px-3 md:px-4 py-2 md:py-3 rounded-lg transition-colors landscape:py-1.5",
         isActive ? "bg-[#172a46] text-white" : "text-gray-300 hover:bg-[#172a46]",
       )}
     >

@@ -107,6 +107,40 @@ export default function Sidebar() {
     }
   }, [mobileMenuOpen])
 
+  // Add effect to handle landscape orientation
+  useEffect(() => {
+    const handleOrientationChange = () => {
+      // Check if we're in landscape mode
+      const isLandscape = window.innerWidth > window.innerHeight
+
+      // If in landscape mode, make sure the sidebar is scrollable
+      if (isLandscape) {
+        const sidebarElement = sidebarRef.current
+        if (sidebarElement) {
+          sidebarElement.style.overflowY = "auto"
+          sidebarElement.style.height = "100%"
+
+          // Force a repaint to ensure scrolling works
+          setTimeout(() => {
+            sidebarElement.style.display = "none"
+            sidebarElement.offsetHeight // Force reflow
+            sidebarElement.style.display = ""
+          }, 50)
+        }
+      }
+    }
+
+    // Run on mount and when orientation changes
+    handleOrientationChange()
+    window.addEventListener("orientationchange", handleOrientationChange)
+    window.addEventListener("resize", handleOrientationChange)
+
+    return () => {
+      window.removeEventListener("orientationchange", handleOrientationChange)
+      window.removeEventListener("resize", handleOrientationChange)
+    }
+  }, [mobileMenuOpen])
+
   // Scroll to section function
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id)
@@ -155,6 +189,12 @@ export default function Sidebar() {
     if (sidebarRef.current) {
       sidebarRef.current.style.transform = ""
     }
+  }
+
+  // Add this function after the existing touch handlers
+  const handleTouchVertical = (e: React.TouchEvent) => {
+    // Allow default touch behavior for vertical scrolling
+    e.stopPropagation()
   }
 
   return (
@@ -252,12 +292,14 @@ export default function Sidebar() {
         className={cn(
           "fixed inset-0 bg-gradient-to-b from-[#0a192f] to-[#0a192f] text-white z-40 transition-transform duration-300 ease-in-out md:hidden",
           mobileMenuOpen ? "translate-x-0" : "-translate-x-full",
+          "overflow-y-auto", // Changed from "overflow-y-auto max-h-screen" to just "overflow-y-auto"
         )}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchEnd}
       >
-        <div className="p-6">
+        <div className="p-6 pb-20">
           <div className="mb-8">
             {/* Profile image removed from mobile sidebar as it's shown in the main page */}
             <h1 className="text-lg font-bold text-center">Tapanat Chaigosi</h1>
