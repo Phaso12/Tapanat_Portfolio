@@ -18,7 +18,7 @@ export default async function Image() {
     <div
       style={{
         fontSize: 48,
-        background: "linear-gradient(to bottom, #f8fafc, #e2e8f0)",
+        background: "linear-gradient(135deg, #0a192f 0%, #172a46 100%)",
         width: "100%",
         height: "100%",
         display: "flex",
@@ -26,39 +26,77 @@ export default async function Image() {
         alignItems: "center",
         justifyContent: "center",
         padding: 50,
+        color: "white",
       }}
     >
+      {/* Logo/Icon */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: 120,
+          height: 120,
+          borderRadius: "50%",
+          background: "#0046b8",
+          marginBottom: 40,
+          fontSize: 60,
+          fontWeight: "bold",
+        }}
+      >
+        TC
+      </div>
+
       <div
         style={{
           fontSize: 60,
           fontWeight: "bold",
-          color: "#0a192f",
+          color: "white",
           marginBottom: 20,
           textAlign: "center",
         }}
       >
         Tapanat Chaigosi
       </div>
+
       <div
         style={{
           fontSize: 36,
           color: "#0046b8",
           marginBottom: 40,
           textAlign: "center",
+          background: "rgba(255, 255, 255, 0.9)",
+          padding: "8px 24px",
+          borderRadius: 8,
+          fontWeight: "bold",
         }}
       >
         Product Owner
       </div>
+
       <div
         style={{
           fontSize: 24,
-          color: "#4b5563",
+          color: "rgba(255, 255, 255, 0.9)",
           maxWidth: 800,
           textAlign: "center",
+          lineHeight: 1.4,
         }}
       >
         Building scalable systems at the intersection of finance and technology
       </div>
+
+      {/* Bottom border */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: 12,
+          background: "#0046b8",
+        }}
+      />
     </div>,
     // ImageResponse options
     {
