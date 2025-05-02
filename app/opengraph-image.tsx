@@ -14,6 +14,7 @@ export const contentType = "image/png"
 
 // Image generation
 export default async function Image() {
+  // Use a simpler approach with a static image
   return new ImageResponse(
     <div
       style={{
@@ -29,18 +30,18 @@ export default async function Image() {
         color: "white",
       }}
     >
-      {/* Logo/Icon */}
+      {/* Profile Image Placeholder */}
       <div
         style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: 120,
-          height: 120,
+          width: 200,
+          height: 200,
           borderRadius: "50%",
           background: "#0046b8",
           marginBottom: 40,
-          fontSize: 60,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          fontSize: 80,
           fontWeight: "bold",
         }}
       >
