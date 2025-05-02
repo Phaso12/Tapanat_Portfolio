@@ -119,37 +119,13 @@ export default function Portfolio() {
     </motion.div>
   )
 
-  // Add a useEffect to detect orientation changes
-  useEffect(() => {
-    // Function to handle orientation changes
-    const handleOrientationChange = () => {
-      // Force a re-render when orientation changes
-      setIsMounted(false)
-      setTimeout(() => setIsMounted(true), 10)
-    }
-
-    // Add event listeners
-    window.addEventListener("orientationchange", handleOrientationChange)
-    window.addEventListener("resize", handleOrientationChange)
-
-    // Clean up
-    return () => {
-      window.removeEventListener("orientationchange", handleOrientationChange)
-      window.removeEventListener("resize", handleOrientationChange)
-    }
-  }, [])
-
-  // Update the grid layout for landscape orientation
-  // In the return statement, add a check for landscape orientation
-  const isLandscape = typeof window !== "undefined" && window.innerHeight < window.innerWidth
-
   return (
     <SectionContainer>
       <SectionHeader icon={<Briefcase className="h-6 w-6 text-[#0046b8]" />} title="Portfolio" />
 
       {/* Desktop layout (3 columns) - now for md and above */}
       <div
-        className={`hidden md:grid ${isLandscape && window.innerHeight < 500 ? "grid-cols-2" : "grid-cols-1 sm:grid-cols-2"} gap-4 sm:gap-5 md:gap-6`}
+        className="hidden md:grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 md:gap-6"
         style={{ maxWidth: "100%", overflowX: "hidden" }}
       >
         {projects.map((project, index) => (

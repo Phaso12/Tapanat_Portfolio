@@ -9,8 +9,30 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Tapanat Chaigosi | Product Owner",
   description: "Portfolio website of Tapanat Chaigosi, Product Owner",
-  // Add viewport meta tag with content width and initial scale
-  viewport: "width=device-width, initial-scale=1, viewport-fit=cover",
+  openGraph: {
+    title: "Tapanat Chaigosi | Product Owner",
+    description:
+      "I'm Tapanat, a product owner with a strong focus on building scalable systems at the intersection of finance and technology.",
+    images: [
+      {
+        url: "/profile-image.png", // Use your profile image
+        width: 1200,
+        height: 630,
+        alt: "Tapanat Chaigosi",
+      },
+    ],
+    type: "website",
+    locale: "en_US",
+    siteName: "Tapanat Chaigosi Portfolio",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tapanat Chaigosi | Product Owner",
+    description:
+      "I'm Tapanat, a product owner with a strong focus on building scalable systems at the intersection of finance and technology.",
+    images: ["/profile-image.png"],
+    creator: "@tapanat",
+  },
     generator: 'v0.dev'
 }
 

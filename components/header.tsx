@@ -100,9 +100,7 @@ export default function Header() {
             </div>*/}
 
             <div className="mt-2">
-              <div className="ipad-timeline-wrapper">
-                <CareerTimeline />
-              </div>
+              <CareerTimeline />
             </div>
           </div>
         </div>

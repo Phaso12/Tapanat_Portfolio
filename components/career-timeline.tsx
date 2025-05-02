@@ -56,12 +56,11 @@ const fadeUpVariants = {
 // Update the timeline container for better tablet support
 const containerStyle: React.CSSProperties = {
   width: "100%",
-  maxWidth: "100%",
+  maxWidth: "100%", // Changed from 1200px to 100%
   margin: "0 auto",
-  padding: "0.75rem 0.75rem",
+  padding: "0.75rem 0.75rem sm:1rem 1rem",
   textAlign: "center",
-  overflowX: "hidden",
-  position: "relative", // Added position relative
+  overflowX: "hidden", // Added overflow-x: hidden
 }
 
 // Mobile stepper outer style with horizontal scrolling
@@ -70,9 +69,6 @@ const mobileStepperOuterStyle: React.CSSProperties = {
   WebkitOverflowScrolling: "touch",
   scrollbarWidth: "none", // Firefox
   msOverflowStyle: "none", // IE/Edge
-  width: "100%", // Added explicit width
-  display: "block", // Added display block
-  maxWidth: "100vw", // Added max-width
 }
 
 // Desktop stepper outer style without scrolling
@@ -88,7 +84,6 @@ const mobileStepperContainerStyle: React.CSSProperties = {
   alignItems: "flex-start",
   minWidth: "800px", // This is likely causing the issue
   paddingBottom: "1.5rem",
-  touchAction: "pan-x", // Added touch-action for better touch handling
 }
 
 // Desktop stepper container style with percentage width
@@ -220,14 +215,12 @@ const CareerTimeline: React.FC = () => {
       // Check if we're on mobile or tablet
       const mobileView = window.innerWidth < 768
       const tabletView = window.innerWidth >= 768 && window.innerWidth <= 834
-      // Add check for landscape orientation
-      const isLandscape = window.innerHeight < window.innerWidth
 
       setIsMobile(mobileView)
       setIsTablet(tabletView)
 
-      // Only check scrollability on mobile or in landscape orientation
-      const isContentScrollable = (mobileView || isLandscape) && container.scrollWidth > container.clientWidth
+      // Only check scrollability on mobile
+      const isContentScrollable = mobileView && container.scrollWidth > container.clientWidth
       setIsScrollable(isContentScrollable)
 
       // Only show arrows if content is scrollable
@@ -253,34 +246,6 @@ const CareerTimeline: React.FC = () => {
     return () => window.removeEventListener("resize", checkScrollability)
   }, [])
 
-  // Add this after the existing useEffect for checkScrollability
-  useEffect(() => {
-    // Special handling for iPad and similar tablet resolutions
-    const handleIPadScrolling = () => {
-      const isIPadResolution =
-        (window.innerWidth === 768 && window.innerHeight === 1024) ||
-        (window.innerWidth === 1024 && window.innerHeight === 768)
-
-      if (isIPadResolution && scrollContainerRef.current) {
-        // Force enable horizontal scrolling for iPad
-        scrollContainerRef.current.style.overflowX = "auto"
-        scrollContainerRef.current.style.WebkitOverflowScrolling = "touch"
-        scrollContainerRef.current.style.maxWidth = "100%"
-        scrollContainerRef.current.style.width = "100%"
-
-        // Make sure the container is wide enough to scroll
-        const innerContainer = scrollContainerRef.current.firstChild as HTMLElement
-        if (innerContainer) {
-          innerContainer.style.minWidth = "800px"
-        }
-      }
-    }
-
-    handleIPadScrolling()
-    window.addEventListener("resize", handleIPadScrolling)
-    return () => window.removeEventListener("resize", handleIPadScrolling)
-  }, [])
-
   // Scroll left or right
   const scroll = (direction: "left" | "right") => {
     const container = scrollContainerRef.current
@@ -297,12 +262,7 @@ const CareerTimeline: React.FC = () => {
   }
 
   return (
-    <section
-      style={containerStyle}
-      className={`career-timeline-container ${window.innerHeight < window.innerWidth ? "landscape-mode" : ""} ${
-        window.innerWidth === 768 || window.innerWidth === 1024 ? "ipad-timeline" : ""
-      }`}
-    >
+    <section style={containerStyle} className="career-timeline-container">
       {/* Add "Full Timeline" heading - only on desktop */}
       {!isMobile && <h3 className="text-base font-medium text-[#0a192f] mb-4 italic">Full Timeline</h3>}
 
