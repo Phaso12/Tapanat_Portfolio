@@ -278,7 +278,7 @@ export default function EngineeringDesignSolutions() {
               <span className="mr-3">
                 <Home className="h-5 w-5" />
               </span>
-              <span>Go  home</span>
+              <span>Go to home</span>
             </button>
           </nav>
         </div>
