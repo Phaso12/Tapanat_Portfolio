@@ -14,13 +14,7 @@ export const contentType = "image/png"
 
 // Image generation - reusing the same design as the OpenGraph image
 export default async function Image() {
-  // Get the profile image
-  const profileImageData = await fetch(new URL("/public/profile-image.png", import.meta.url)).then((res) =>
-    res.arrayBuffer(),
-  )
-
   return new ImageResponse(
-    // ImageResponse JSX element
     <div
       style={{
         fontSize: 48,
@@ -34,24 +28,6 @@ export default async function Image() {
         padding: 50,
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          marginBottom: 40,
-        }}
-      >
-        <img
-          src={profileImageData || "/placeholder.svg"}
-          width={200}
-          height={200}
-          style={{
-            borderRadius: "50%",
-            border: "4px solid #0046b8",
-          }}
-        />
-      </div>
       <div
         style={{
           fontSize: 60,
