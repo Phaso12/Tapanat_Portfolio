@@ -18,10 +18,12 @@ export default function Home() {
       <main className="flex-1 md:ml-64 overflow-x-hidden">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 py-6 md:py-8 overflow-x-hidden">
           <Header />
-          <div className="space-y-16 sm:space-y-20 md:space-y-24 mt-12 sm:mt-14 md:mt-16 overflow-x-hidden">
+          <div className="space-y-2 sm:space-y-2 md:space-y-2 mt-2 sm:mt-14 md:mt-16 overflow-x-hidden">
             <section id="resume" className="overflow-x-hidden">
               <Resume />
             </section>
+          </div>
+          <div className="space-y-2 sm:space-y-2 md:space-y-2 mt-12 sm:mt-14 md:mt-16 overflow-x-hidden">
             <section id="portfolio" className="overflow-x-hidden">
               <Portfolio />
             </section>
