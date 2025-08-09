@@ -11,7 +11,7 @@ const resumeData = {
   name: "Tapanat Chaigosi",
   title: "Product Owner",
   // Convert Google Drive sharing link to direct download link
-  pdfUrl: "https://drive.google.com/file/d/1NfrBAbiREBJkyY_y1MFpu_wwkZjzqAUC/view?usp=sharing",
+  pdfUrl: "https://drive.google.com/file/d/1uPwPsPcXuBt5ULMrmF7PVAVabRmzrm1B/view?usp=sharing",
   thumbnailPath1: "/Resume_Preview_Page_1.png",
   thumbnailPath2: "/Resume_Preview_Page_2.png",
 }
