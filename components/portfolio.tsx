@@ -55,7 +55,7 @@ export default function Portfolio() {
       skills: ["Leadership", "Critical Thinking", "Problem Solving", "Cross-Functional Collaboration"],
     },
     {
-      title: "Cryptocurrency Algorithmic Trading",
+      title: "Cryptocurrency Algorithmic Trade",
       displayTitle: "Cryptocurrency Algorithmic Trading",
       image: null,
       customImage: true,
