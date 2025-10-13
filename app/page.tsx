@@ -17,7 +17,7 @@ export default function Home() {
     <>
       {/* ✅ Google Analytics Script */}
       <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-KGDMER4GV5"
+        src="https://www.googletagmanager.com/gtag/js?id=G-YYDER88YTP"
         strategy="afterInteractive"
       />
       <Script id="google-analytics" strategy="afterInteractive">
