@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import Script from "next/script"
+import { Analytics } from "@vercel/analytics/react"
 import Sidebar from "@/components/sidebar"
 import Header from "@/components/header"
 import Resume from "@/components/resume"
@@ -15,21 +15,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      {/* ✅ Google Analytics Script */}
-      <Script
-        src="https://www.googletagmanager.com/gtag/js?id=G-YYDER88YTP"
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'G-YYDER88YTP');
-        `}
-      </Script>
-
-      {/* Your actual page */}
+      {/* ✅ Page Content */}
       <div className="flex flex-col md:flex-row min-h-screen bg-[#f8fafc] overflow-x-hidden">
         <Sidebar />
         <main className="flex-1 md:ml-64 overflow-x-hidden">
@@ -51,6 +37,9 @@ export default function Home() {
           </div>
         </main>
       </div>
+
+      {/* ✅ Vercel Analytics */}
+      <Analytics />
     </>
   )
 }
