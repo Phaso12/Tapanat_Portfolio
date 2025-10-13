@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Script from "next/script"
 import Sidebar from "@/components/sidebar"
 import Header from "@/components/header"
 import Resume from "@/components/resume"
@@ -13,26 +14,43 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-[#f8fafc] overflow-x-hidden">
-      <Sidebar />
-      <main className="flex-1 md:ml-64 overflow-x-hidden">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 py-6 md:py-8 overflow-x-hidden">
-          <Header />
-          <div className="space-y-2 sm:space-y-2 md:space-y-2 mt-2 sm:mt-14 md:mt-16 overflow-x-hidden">
-            <section id="resume" className="overflow-x-hidden">
-              <Resume />
-            </section>
+    <>
+      {/* ✅ Google Analytics Script */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-KGDMER4GV5"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-YYDER88YTP');
+        `}
+      </Script>
+
+      {/* Your actual page */}
+      <div className="flex flex-col md:flex-row min-h-screen bg-[#f8fafc] overflow-x-hidden">
+        <Sidebar />
+        <main className="flex-1 md:ml-64 overflow-x-hidden">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-8 py-6 md:py-8 overflow-x-hidden">
+            <Header />
+            <div className="space-y-2 sm:space-y-2 md:space-y-2 mt-2 sm:mt-14 md:mt-16 overflow-x-hidden">
+              <section id="resume" className="overflow-x-hidden">
+                <Resume />
+              </section>
+            </div>
+            <div className="space-y-2 sm:space-y-2 md:space-y-2 mt-12 sm:mt-14 md:mt-16 overflow-x-hidden">
+              <section id="portfolio" className="overflow-x-hidden">
+                <Portfolio />
+              </section>
+              <section id="certifications" className="overflow-x-hidden">
+                <Certifications />
+              </section>
+            </div>
           </div>
-          <div className="space-y-2 sm:space-y-2 md:space-y-2 mt-12 sm:mt-14 md:mt-16 overflow-x-hidden">
-            <section id="portfolio" className="overflow-x-hidden">
-              <Portfolio />
-            </section>
-            <section id="certifications" className="overflow-x-hidden">
-              <Certifications />
-            </section>
-          </div>
-        </div>
-      </main>
-    </div>
+        </main>
+      </div>
+    </>
   )
 }
