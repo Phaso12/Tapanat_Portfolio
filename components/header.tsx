@@ -50,7 +50,7 @@ export default function Header() {
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-[#0a192f] tracking-tight">Tapanat Chaigosi</h1>
           <hr className="my-3 sm:my-4 mx-auto w-1/3 border border-[#b8b2b2] opacity-60" />
           <h2 className="text-xl sm:text-2xl md:text-3xl font-medium text-[#0a192f] mb-4 sm:mb-5 md:mb-6">
-            Product Owner
+            Product Owner | Product Manager
           </h2>
 
           <Button

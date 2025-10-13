@@ -193,7 +193,7 @@ export default function Sidebar() {
             </div>
             <h1 className="text-xl font-bold text-center">Tapanat Chaigosi</h1>
             <div className="mt-2 pt-2 border-t border-[#ffffff]/50">
-              <p className="text-sm text-center text-white font-medium">Product Owner | Produt Manager | FinTech Specialist</p>
+              <p className="text-sm text-center text-white font-medium">Product Owner & Manager | FinTech Specialist</p>
             </div>
           </div>
 
