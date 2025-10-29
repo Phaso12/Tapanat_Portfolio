@@ -173,7 +173,6 @@ const desktopOrganizationStyle: React.CSSProperties = {
   fontSize: "0.75rem",
   fontStyle: "italic",
   opacity: 0.8,
-  lineHeight: 1.3,
 }
 
 const CareerTimeline: React.FC = () => {
@@ -250,13 +249,13 @@ const CareerTimeline: React.FC = () => {
                   {event.role}
                 </div>
 
-                {/* ✅ handle special line break only for desktop */}
                 <div style={isMobile || isTablet ? mobileOrganizationStyle : desktopOrganizationStyle}>
+                  {/* Desktop-only custom wrap for KKPB */}
                   {event.organization === "Kiatnakin Phatra Financial Group" && !isMobile && !isTablet ? (
                     <>
-                      Kiatnakin Phatra Financial
+                      Kiatnakin Phatra
                       <br />
-                      Group
+                      <span style={{ whiteSpace: "nowrap" }}>Financial Group</span>
                     </>
                   ) : (
                     event.organization
