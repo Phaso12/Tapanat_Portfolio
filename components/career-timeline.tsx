@@ -65,7 +65,7 @@ const containerStyle: React.CSSProperties = {
   overflowX: "hidden",
 }
 
-const mobileStepperOuterStyle: React.CSSProperties = {
+const scrollableOuterStyle: React.CSSProperties = {
   overflowX: "auto",
   WebkitOverflowScrolling: "touch",
   scrollbarWidth: "none",
@@ -81,7 +81,7 @@ const mobileStepperContainerStyle: React.CSSProperties = {
   display: "flex",
   justifyContent: "space-between",
   alignItems: "flex-start",
-  minWidth: "960px", // wider for 6 items
+  minWidth: "960px",
   paddingBottom: "1.5rem",
 }
 
@@ -184,11 +184,15 @@ const CareerTimeline: React.FC = () => {
   const checkScrollability = () => {
     const container = scrollContainerRef.current
     if (!container) return
+
     const mobileView = window.innerWidth < 768
-    const tabletView = window.innerWidth >= 768 && window.innerWidth <= 834
+    const tabletView = window.innerWidth >= 768 && window.innerWidth <= 1024 // extended for tablets
+
     setIsMobile(mobileView)
     setIsTablet(tabletView)
-    setIsScrollable(mobileView && container.scrollWidth > container.clientWidth)
+
+    const canScroll = (mobileView || tabletView) && container.scrollWidth > container.clientWidth
+    setIsScrollable(canScroll)
   }
 
   useEffect(() => {
@@ -216,13 +220,12 @@ const CareerTimeline: React.FC = () => {
       <div className="relative">
         <div
           ref={scrollContainerRef}
-          style={isMobile ? mobileStepperOuterStyle : desktopStepperOuterStyle}
+          style={isMobile || isTablet ? scrollableOuterStyle : desktopStepperOuterStyle}
           onScroll={checkScrollability}
           className="md:overflow-hidden"
         >
           <div
-            style={isMobile ? mobileStepperContainerStyle : desktopStepperContainerStyle}
-            className={isTablet ? "tablet-timeline-container" : ""}
+            style={isMobile || isTablet ? mobileStepperContainerStyle : desktopStepperContainerStyle}
           >
             {/* continuous line + arrowhead */}
             <div style={lineStyle}></div>
@@ -238,10 +241,14 @@ const CareerTimeline: React.FC = () => {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
               >
-                <div style={isMobile ? mobileYearStyle : desktopYearStyle}>{event.year}</div>
+                <div style={isMobile || isTablet ? mobileYearStyle : desktopYearStyle}>
+                  {event.year}
+                </div>
                 <div style={bulletStyle}>{event.icon}</div>
-                <div style={isMobile ? mobileRoleStyle : desktopRoleStyle}>{event.role}</div>
-                <div style={isMobile ? mobileOrganizationStyle : desktopOrganizationStyle}>
+                <div style={isMobile || isTablet ? mobileRoleStyle : desktopRoleStyle}>
+                  {event.role}
+                </div>
+                <div style={isMobile || isTablet ? mobileOrganizationStyle : desktopOrganizationStyle}>
                   {event.organization}
                 </div>
               </motion.div>
