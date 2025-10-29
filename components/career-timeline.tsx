@@ -9,7 +9,7 @@ const timelineEvents = [
   {
     year: "2012 - 2016",
     role: "Bachelor of Automotive Engineering",
-    organization: "Thai-Nichi Institute of Technology",
+    organization: "Thai-Nichi Institute of Technology (TNI)",
     type: "education",
     icon: <GraduationCap className="h-6 w-6 text-white" />,
   },
@@ -43,7 +43,7 @@ const timelineEvents = [
   },
     {
     year: "2025 - Present",
-    role: "Product Manager (Banking)",
+    role: "Product Manager",
     organization: "Kiatnakin Phatra Bank",
     type: "work",
     icon: <Briefcase className="h-6 w-6 text-white" />,
