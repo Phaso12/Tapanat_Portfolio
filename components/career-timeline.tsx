@@ -173,7 +173,6 @@ const desktopOrganizationStyle: React.CSSProperties = {
   fontSize: "0.75rem",
   fontStyle: "italic",
   opacity: 0.8,
-  lineHeight: 1.3,
 }
 
 const CareerTimeline: React.FC = () => {
@@ -188,6 +187,7 @@ const CareerTimeline: React.FC = () => {
 
     const mobileView = window.innerWidth < 768
     const tabletView = window.innerWidth >= 768 && window.innerWidth <= 1024
+
     setIsMobile(mobileView)
     setIsTablet(tabletView)
 
@@ -227,7 +227,7 @@ const CareerTimeline: React.FC = () => {
           <div
             style={isMobile || isTablet ? mobileStepperContainerStyle : desktopStepperContainerStyle}
           >
-            {/* line + arrow */}
+            {/* continuous line + arrowhead */}
             <div style={lineStyle}></div>
             <div style={arrowHeadStyle}></div>
 
@@ -250,23 +250,13 @@ const CareerTimeline: React.FC = () => {
                 </div>
 
                 <div style={isMobile || isTablet ? mobileOrganizationStyle : desktopOrganizationStyle}>
-                  {/* Desktop-only custom wrapping rules */}
-                  {!isMobile && !isTablet ? (
-                    event.organization === "Kiatnakin Phatra Financial Group" ? (
-                      <>
-                        Kiatnakin Phatra
-                        <br />
-                        <span style={{ whiteSpace: "nowrap" }}>Financial Group</span>
-                      </>
-                    ) : event.organization === "Thai-Nichi Institute of Technology" ? (
-                      <>
-                        Thai-Nichi Institute of
-                        <br />
-                        <span style={{ whiteSpace: "nowrap" }}>Technology</span>
-                      </>
-                    ) : (
-                      event.organization
-                    )
+                  {/* Desktop-only custom wrap for KKPB */}
+                  {event.organization === "Kiatnakin Phatra Financial Group" && !isMobile && !isTablet ? (
+                    <>
+                      Kiatnakin Phatra
+                      <br />
+                      <span style={{ whiteSpace: "nowrap" }}>Financial Group</span>
+                    </>
                   ) : (
                     event.organization
                   )}
