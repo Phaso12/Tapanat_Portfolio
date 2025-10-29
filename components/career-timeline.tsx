@@ -8,14 +8,14 @@ const timelineEvents = [
   {
     year: "2012 - 2016",
     role: "Bachelor of Automotive Engineering",
-    organization: "Thai-Nichi Institute of Technology (TNI)",
+    organization: "Thai-Nichi Institute of Technology",
     type: "education",
     icon: <GraduationCap className="h-6 w-6 text-white" />,
   },
   {
     year: "2016 - 2020",
     role: "Senior Automotive Engineer",
-    organization: "Toyota Motor Asia Pacific (TMAP)",
+    organization: "Toyota Motor Asia Pacific",
     type: "work",
     icon: <Briefcase className="h-6 w-6 text-white" />,
   },
@@ -43,7 +43,7 @@ const timelineEvents = [
   {
     year: "2025 - Present",
     role: "Product Owner (Banking)",
-    organization: "Kiatnakin Phatra Bank (KKP)",
+    organization: "Kiatnakin Phatra Financial Group",
     type: "work",
     icon: <Briefcase className="h-6 w-6 text-white" />,
   },
