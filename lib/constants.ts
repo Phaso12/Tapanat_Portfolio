@@ -8,7 +8,7 @@ export const SITE_METADATA = {
   title: "Tapanat Chaigosi | Product Manager",
   role: "Product Manager",
   description:
-    "A product manager with a strong focus on building scalable systems at the intersection of finance and technology.",
+    "A product manager with a strong focus on building scalable systems at the intersection of finance and technology. I specialize in data-driven product development, particularly in FinTech and Web3, where I combine product strategy, technical insight, and execution to create meaningful solutions.",
   url: "https://tapanat-portfolio.vercel.app/",
   siteName: "Tapanat Chaigosi Portfolio",
   image: {
