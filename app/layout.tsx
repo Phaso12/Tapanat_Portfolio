@@ -9,12 +9,12 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Tapanat Chaigosi | Product Manager",
   description:
-    "A product owner with a strong focus on building scalable systems at the intersection of finance and technology. I specialize in data-driven product development, particularly in FinTech and Web3, where I combine product strategy, technical insight, and execution to create meaningful solutions.",
+    "A product manager with a strong focus on building scalable systems at the intersection of finance and technology. I specialize in data-driven product development, particularly in FinTech and Web3, where I combine product strategy, technical insight, and execution to create meaningful solutions.",
   generator: "v0.app",
   openGraph: {
     title: "Tapanat Chaigosi | Product Manager",
     description:
-      "A product owner with a strong focus on building scalable systems at the intersection of finance and technology. I specialize in data-driven product development, particularly in FinTech and Web3, where I combine product strategy, technical insight, and execution to create meaningful solutions.",
+      "A product manager with a strong focus on building scalable systems at the intersection of finance and technology. I specialize in data-driven product development, particularly in FinTech and Web3, where I combine product strategy, technical insight, and execution to create meaningful solutions.",
     url: "https://tapanat-portfolio.vercel.app/",
     siteName: "Tapanat Chaigosi Portfolio",
     images: [
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Tapanat Chaigosi | Product Manager",
     description:
-      "A product owner with a strong focus on building scalable systems at the intersection of finance and technology. I specialize in data-driven product development, particularly in FinTech and Web3, where I combine product strategy, technical insight, and execution to create meaningful solutions.",
+      "A product manager with a strong focus on building scalable systems at the intersection of finance and technology. I specialize in data-driven product development, particularly in FinTech and Web3, where I combine product strategy, technical insight, and execution to create meaningful solutions.",
     images: ["/profile-image.png"],
   },
 }
