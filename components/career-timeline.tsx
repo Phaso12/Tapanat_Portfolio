@@ -173,6 +173,7 @@ const desktopOrganizationStyle: React.CSSProperties = {
   fontSize: "0.75rem",
   fontStyle: "italic",
   opacity: 0.8,
+  lineHeight: 1.3,
 }
 
 const CareerTimeline: React.FC = () => {
@@ -209,7 +210,9 @@ const CareerTimeline: React.FC = () => {
 
   return (
     <section style={containerStyle} className="career-timeline-container">
-      {!isMobile && <h3 className="text-base font-medium text-[#0a192f] mb-4 italic">Full Timeline</h3>}
+      {!isMobile && (
+        <h3 className="text-base font-medium text-[#0a192f] mb-4 italic">Full Timeline</h3>
+      )}
 
       {isScrollable && (
         <div className="mb-4 text-center text-sm text-gray-500">
@@ -227,7 +230,7 @@ const CareerTimeline: React.FC = () => {
           <div
             style={isMobile || isTablet ? mobileStepperContainerStyle : desktopStepperContainerStyle}
           >
-            {/* continuous line + arrowhead */}
+            {/* line + arrow */}
             <div style={lineStyle}></div>
             <div style={arrowHeadStyle}></div>
 
@@ -249,14 +252,26 @@ const CareerTimeline: React.FC = () => {
                   {event.role}
                 </div>
 
-                <div style={isMobile || isTablet ? mobileOrganizationStyle : desktopOrganizationStyle}>
-                  {/* Desktop-only custom wrap for KKPB */}
-                  {event.organization === "Kiatnakin Phatra Financial Group" && !isMobile && !isTablet ? (
-                    <>
-                      Kiatnakin Phatra
-                      <br />
-                      <span style={{ whiteSpace: "nowrap" }}>Financial Group</span>
-                    </>
+                <div
+                  style={isMobile || isTablet ? mobileOrganizationStyle : desktopOrganizationStyle}
+                >
+                  {/* Desktop-only special wrapping rules */}
+                  {!isMobile && !isTablet ? (
+                    event.organization === "Kiatnakin Phatra Financial Group" ? (
+                      <>
+                        Kiatnakin Phatra
+                        <br />
+                        <span style={{ whiteSpace: "nowrap" }}>Financial Group</span>
+                      </>
+                    ) : event.organization === "Thai-Nichi Institute of Technology" ? (
+                      <>
+                        Thai-Nichi Institute
+                        <br />
+                        <span style={{ whiteSpace: "nowrap" }}>of Technology</span>
+                      </>
+                    ) : (
+                      event.organization
+                    )
                   ) : (
                     event.organization
                   )}
