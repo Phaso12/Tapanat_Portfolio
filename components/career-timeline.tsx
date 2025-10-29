@@ -62,6 +62,7 @@ const fadeUpVariants = {
 // Layout constants
 const MOBILE_STEP_MIN_PX = 140
 const STEP_GAP_PX = 12
+const LINE_TOP_PX = 55 // baseline for the horizontal line position
 
 // Styles
 const containerStyle: React.CSSProperties = {
@@ -79,10 +80,12 @@ const mobileStepperOuterStyle: React.CSSProperties = {
   scrollbarWidth: "none",
   msOverflowStyle: "none",
   scrollSnapType: "x mandatory",
+  overscrollBehaviorX: "contain",
 }
 
 const desktopStepperOuterStyle: React.CSSProperties = {
-  overflowX: "hidden",
+  overflowX: "hidden",          // prevent swipe/scroll on desktop & tablet
+  touchAction: "none",          // block trackpad horizontal scroll gestures
 }
 
 const desktopStepperContainerStyle: React.CSSProperties = {
@@ -107,7 +110,7 @@ const stepStyle: React.CSSProperties = {
 
 const lineStyle: React.CSSProperties = {
   position: "absolute",
-  top: "55px",
+  top: `${LINE_TOP_PX}px`,
   left: 0,
   right: "10px",
   height: "3px",
@@ -163,6 +166,24 @@ const bulletStyle: React.CSSProperties = {
   marginBottom: "0.5rem",
 }
 
+// Arrowhead overlay that never scrolls out of view
+const ArrowOverlay: React.FC = () => (
+  <div
+    style={{
+      position: "absolute",
+      top: `${LINE_TOP_PX + 0.5}px`,
+      right: 0,
+      width: 0,
+      height: 0,
+      borderTop: "6px solid transparent",
+      borderBottom: "6px solid transparent",
+      borderLeft: "10px solid #0046b8",
+      zIndex: 5,
+      pointerEvents: "none", // don’t block user interactions
+    }}
+  />
+)
+
 const CareerTimeline: React.FC = () => {
   const [isScrollable, setIsScrollable] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
@@ -174,7 +195,7 @@ const CareerTimeline: React.FC = () => {
     const container = scrollContainerRef.current
     if (container) {
       const mobileView = window.innerWidth < 768
-      const tabletView = window.innerWidth >= 768 && window.innerWidth <= 834
+      const tabletView = window.innerWidth >= 768 && window.innerWidth <= 1024
       setIsMobile(mobileView)
       setIsTablet(tabletView)
 
@@ -184,6 +205,7 @@ const CareerTimeline: React.FC = () => {
   }
 
   const handleScroll = () => {
+    // keep the scrollability flag fresh on mobile
     checkScrollability()
   }
 
@@ -198,22 +220,27 @@ const CareerTimeline: React.FC = () => {
 
   return (
     <section style={containerStyle} className="career-timeline-container">
+      {/* Desktop label */}
       {!isMobile && (
         <h3 className="text-base font-medium text-[#0a192f] mb-4 italic">Full Timeline</h3>
       )}
 
+      {/* Mobile hint */}
       {isScrollable && (
         <div className="mb-4 text-center text-sm text-gray-500">
           <span>Scroll for Full Timeline</span>
         </div>
       )}
 
+      {/* Outer wrapper is relative so the arrow overlay can anchor to the viewport edge */}
       <div className="relative">
+        {/* Arrowhead overlay (always visible on all breakpoints) */}
+        <ArrowOverlay />
+
         <div
           ref={scrollContainerRef}
           style={isMobile ? mobileStepperOuterStyle : desktopStepperOuterStyle}
           onScroll={handleScroll}
-          className="md:overflow-hidden"
         >
           <div
             style={
@@ -231,24 +258,10 @@ const CareerTimeline: React.FC = () => {
             }
             className={isTablet ? "tablet-timeline-container" : ""}
           >
+            {/* Scrolling line */}
             <div style={lineStyle}></div>
 
-            {!isMobile && (
-              <div
-                style={{
-                  position: "absolute",
-                  top: "50.5px",
-                  right: 0,
-                  width: 0,
-                  height: 0,
-                  borderTop: "6px solid transparent",
-                  borderBottom: "6px solid transparent",
-                  borderLeft: "10px solid #0046b8",
-                  zIndex: 1,
-                }}
-              ></div>
-            )}
-
+            {/* Milestones */}
             {timelineEvents.map((event) => (
               <motion.div
                 key={`${event.year}-${event.role}`}
