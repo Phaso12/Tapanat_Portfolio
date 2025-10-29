@@ -15,7 +15,7 @@ const timelineEvents = [
   {
     year: "2016 - 2020",
     role: "Senior Automotive Engineer",
-    organization: "Toyota Motor Asia Pacific Engineering & Manufacturing",
+    organization: "Toyota Motor Asia Pacific (TMAP)",
     type: "work",
     icon: <Briefcase className="h-6 w-6 text-white" />,
   },
