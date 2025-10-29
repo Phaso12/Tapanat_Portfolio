@@ -49,10 +49,14 @@ const timelineEvents = [
   },
 ]
 
-// Animations
+// Animation variants for fade-up
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: "easeOut" },
+  },
 }
 
 // Container
@@ -65,7 +69,7 @@ const containerStyle: React.CSSProperties = {
   overflowX: "hidden",
 }
 
-// Scroll wrappers
+// Mobile scroll wrapper
 const mobileStepperOuterStyle: React.CSSProperties = {
   overflowX: "auto",
   WebkitOverflowScrolling: "touch",
@@ -73,51 +77,43 @@ const mobileStepperOuterStyle: React.CSSProperties = {
   msOverflowStyle: "none",
 }
 
+// Desktop wrapper
 const desktopStepperOuterStyle: React.CSSProperties = {
   overflowX: "hidden",
 }
 
-/** 
- * STEP CONTAINERS
- * We draw the blue line as a background on the container, so it never gets “broken”.
- * backgroundSize uses (100% - 10px) so the arrowhead area has space on the right.
- */
-const baseStepperBg: React.CSSProperties = {
+// Mobile container (give more width to fit the extra item)
+const mobileStepperContainerStyle: React.CSSProperties = {
   position: "relative",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "flex-start",
+  minWidth: "960px",          // <- was 800px; more room so items aren’t cramped
   paddingBottom: "1.5rem",
-  columnGap: "1.25rem",
-  backgroundImage: "linear-gradient(to right, #005BE2, #0046b8)",
-  backgroundRepeat: "no-repeat",
-  backgroundSize: "calc(100% - 10px) 3px",
-  backgroundPosition: "0 55px",
 }
 
-const mobileStepperContainerStyle: React.CSSProperties = {
-  ...baseStepperBg,
-  minWidth: "800px",
-}
-
+// Desktop container
 const desktopStepperContainerStyle: React.CSSProperties = {
-  ...baseStepperBg,
-  columnGap: "1rem",
-  width: "100%",
-}
-
-// Bullet + text
-const bulletStyle: React.CSSProperties = {
+  position: "relative",
   display: "flex",
-  justifyContent: "center",
-  alignItems: "center",
-  width: "40px",
-  height: "40px",
-  borderRadius: "50%",
-  background: "linear-gradient(to bottom, #005BE2, #0046b8)",
-  marginBottom: "0.5rem",
+  justifyContent: "space-between",
+  alignItems: "flex-start",
+  width: "100%",
+  paddingBottom: "1.5rem",
 }
 
+// Horizontal line (unchanged original approach)
+const lineStyle: React.CSSProperties = {
+  position: "absolute",
+  top: "55px",
+  left: 0,
+  right: "10px", // space for arrowhead
+  height: "3px",
+  background: "linear-gradient(to right, #005BE2, #0046b8)",
+  zIndex: 1,
+}
+
+// Step (keep it simple; no tailwind-like strings in inline CSS)
 const stepStyleBase: React.CSSProperties = {
   position: "relative",
   display: "flex",
@@ -126,10 +122,11 @@ const stepStyleBase: React.CSSProperties = {
   zIndex: 2,
 }
 
+// Text styles
 const mobileYearStyle: React.CSSProperties = {
   marginBottom: "0.5rem",
   fontWeight: 700,
-  fontSize: "1rem",
+  fontSize: "1rem", // slightly smaller to avoid “2025 2025” crowding
   whiteSpace: "nowrap",
 }
 
@@ -163,7 +160,19 @@ const desktopOrganizationStyle: React.CSSProperties = {
   opacity: 0.8,
 }
 
+const bulletStyle: React.CSSProperties = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  width: "40px",
+  height: "40px",
+  borderRadius: "50%",
+  background: "linear-gradient(to bottom, #005BE2, #0046b8)",
+  marginBottom: "0.5rem",
+}
+
 const CareerTimeline: React.FC = () => {
+  // keep states (even if arrows are not shown) for future use
   const [showLeftArrow, setShowLeftArrow] = useState(false)
   const [showRightArrow, setShowRightArrow] = useState(true)
   const [isScrollable, setIsScrollable] = useState(false)
@@ -211,10 +220,11 @@ const CareerTimeline: React.FC = () => {
     container.scrollTo({ left: newScrollLeft, behavior: "smooth" })
   }
 
+  // Wider per-step width on mobile/tablet to prevent year labels from touching
   const computedStepStyle: React.CSSProperties = {
     ...stepStyleBase,
-    minWidth: isMobile ? 148 : isTablet ? 132 : 120,
-    margin: "0",
+    minWidth: isMobile ? 160 : isTablet ? 140 : 120, // <- main fix (no gaps needed)
+    margin: "0",                                     // spacing handled by flex layout
   }
 
   return (
@@ -238,7 +248,10 @@ const CareerTimeline: React.FC = () => {
             style={isMobile ? mobileStepperContainerStyle : desktopStepperContainerStyle}
             className={isTablet ? "tablet-timeline-container" : ""}
           >
-            {/* Arrowhead (desktop only) */}
+            {/* Original continuous line */}
+            <div style={lineStyle}></div>
+
+            {/* Arrowhead at the end (desktop) */}
             {!isMobile && (
               <div
                 style={{
