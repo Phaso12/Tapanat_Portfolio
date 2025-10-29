@@ -68,12 +68,12 @@ export default function Header() {
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 md:p-10 relative overflow-hidden">
           <div className="space-y-4 text-base md:text-lg text-gray-700 max-w-4xl mx-auto leading-relaxed">
             <p>
-              Hi, I'm Tapanat, a product owner with a strong focus on building scalable systems at the intersection of
+              Hi, I'm Tapanat, a product manager with a strong focus on building scalable systems at the intersection of
               finance and technology. I specialize in data-driven product development, particularly in FinTech and Web3,
               where I combine product strategy, technical insight, and execution to create meaningful solutions.
             </p>
             <p>
-              My goal is to become a Product Owner who effectively bridges innovative FinTech solutions with real user
+              My goal is to become a Product Manager who effectively bridges innovative FinTech solutions with real user
               needs. I am committed to building data-driven, user-centric products that are not only technically robust
               but also secure, compliant, and aligned with commercial objectives. I work closely with cross-functional
               teams including commercial, compliance, and engineering to deliver impactful products that provide
