@@ -43,7 +43,7 @@ const timelineEvents = [
   },
     {
     year: "2025 - Present",
-    role: "Product Manager",
+    role: "Product Owner (Banking)",
     organization: "Kiatnakin Phatra Bank",
     type: "work",
     icon: <Briefcase className="h-6 w-6 text-white" />,

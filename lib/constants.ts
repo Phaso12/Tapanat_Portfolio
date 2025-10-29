@@ -5,10 +5,10 @@ export const COUNTUP_DURATION = 2
 // Site Metadata Configuration
 export const SITE_METADATA = {
   name: "Tapanat Chaigosi",
-  title: "Tapanat Chaigosi | Product Manager",
-  role: "Product Manager",
+  title: "Tapanat Chaigosi | Product Owner",
+  role: "Product Owner",
   description:
-    "A product manager with a strong focus on building scalable systems at the intersection of finance and technology. I specialize in data-driven product development, particularly in FinTech and Web3, where I combine product strategy, technical insight, and execution to create meaningful solutions.",
+    "A product owner with a strong focus on building scalable systems at the intersection of finance and technology. I specialize in data-driven product development, particularly in FinTech and Web3, where I combine product strategy, technical insight, and execution to create meaningful solutions.",
   url: "https://tapanat-portfolio.vercel.app/",
   siteName: "Tapanat Chaigosi Portfolio",
   image: {
