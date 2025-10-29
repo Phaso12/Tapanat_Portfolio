@@ -1,10 +1,10 @@
 "use client"
 
-import React, { useState, useEffect } from "react"
+import React from "react"
 import { motion } from "framer-motion"
-import { GraduationCap, Briefcase, ChevronLeft, ChevronRight } from "lucide-react"
+import { GraduationCap, Briefcase } from "lucide-react"
+import { useState, useEffect } from "react"
 
-// --- Data ---
 const timelineEvents = [
   {
     year: "2012 - 2016",
@@ -35,22 +35,15 @@ const timelineEvents = [
     icon: <Briefcase className="h-6 w-6 text-white" />,
   },
   {
-    year: "2023 - 2025",
+    year: "2023 - Present",
     role: "Product Owner (Web3)",
     organization: "VUCA Digital",
     type: "work",
     icon: <Briefcase className="h-6 w-6 text-white" />,
   },
-  {
-    year: "2025 - Present",
-    role: "Product Owner (Banking)",
-    organization: "Kiatnakin Phatra Bank",
-    type: "work",
-    icon: <Briefcase className="h-6 w-6 text-white" />,
-  },
 ]
 
-// --- Animation ---
+// Animation variants for fade-up
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
@@ -60,87 +53,122 @@ const fadeUpVariants = {
   },
 }
 
-// --- Layout constants ---
-const MOBILE_STEP_MIN_PX = 140
-const STEP_GAP_PX = 12
-const LINE_TOP_PX = 55 // vertical position of the blue line
-
-// --- Styles ---
+// Update the timeline container for better tablet support
 const containerStyle: React.CSSProperties = {
   width: "100%",
-  maxWidth: "100%",
+  maxWidth: "100%", // Changed from 1200px to 100%
   margin: "0 auto",
-  padding: "0.75rem",
+  padding: "0.75rem 0.75rem sm:1rem 1rem",
   textAlign: "center",
-  overflowX: "hidden",
+  overflowX: "hidden", // Added overflow-x: hidden
 }
 
-// Scrollable viewport (desktop & mobile)
-const scrollerOuterStyle: React.CSSProperties = {
+// Mobile stepper outer style with horizontal scrolling
+const mobileStepperOuterStyle: React.CSSProperties = {
   overflowX: "auto",
-  overflowY: "hidden",
   WebkitOverflowScrolling: "touch",
-  scrollbarWidth: "thin",
-  padding: "0 2.5rem", // room so desktop nav buttons don't overlap content
+  scrollbarWidth: "none", // Firefox
+  msOverflowStyle: "none", // IE/Edge
 }
 
-// Inner flex container (desktop/tablet; width expands to content so it can scroll)
-const desktopInnerStyle: React.CSSProperties = {
+// Desktop stepper outer style without scrolling
+const desktopStepperOuterStyle: React.CSSProperties = {
+  overflowX: "hidden", // Added overflow-x: hidden
+}
+
+// Mobile stepper container style with minimum width
+const mobileStepperContainerStyle: React.CSSProperties = {
   position: "relative",
   display: "flex",
-  justifyContent: "flex-start",
+  justifyContent: "space-between",
   alignItems: "flex-start",
-  width: "max-content", // critical: prevents clipping, allows full content width
+  minWidth: "800px", // This is likely causing the issue
   paddingBottom: "1.5rem",
-  gap: `${STEP_GAP_PX}px`,
 }
 
-// Mobile inner container (dynamic min-width so it scrolls)
-const mobileInnerBase: React.CSSProperties = {
+// Desktop stepper container style with percentage width
+const desktopStepperContainerStyle: React.CSSProperties = {
   position: "relative",
   display: "flex",
-  justifyContent: "flex-start",
+  justifyContent: "space-between",
   alignItems: "flex-start",
+  width: "100%",
   paddingBottom: "1.5rem",
-  gap: `${STEP_GAP_PX}px`,
 }
 
+// Update the lineStyle to include a pseudo-element for the arrowhead
+const lineStyle: React.CSSProperties = {
+  position: "absolute",
+  top: "55px",
+  left: 0,
+  right: "10px", // Adjust right to make space for the arrowhead
+  height: "3px",
+  // A gradient from darker to lighter navy
+  background: "linear-gradient(to right, #005BE2, #0046b8)",
+  zIndex: 1,
+}
+
+// Add tablet-specific styles for the timeline steps
 const stepStyle: React.CSSProperties = {
   position: "relative",
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  minWidth: `${MOBILE_STEP_MIN_PX}px`,
+  minWidth: "120px",
+  margin: "0 0.5rem sm:0 0.75rem md:0 1rem",
   zIndex: 2,
 }
 
-const lineStyle: React.CSSProperties = {
-  position: "absolute",
-  top: `${LINE_TOP_PX}px`,
-  left: 0,
-  right: "14px", // leave space for the arrowhead triangle
-  height: "3px",
-  background: "linear-gradient(to right, #005BE2, #0046b8)",
-  zIndex: 1,
-}
-
-const yearMobile: React.CSSProperties = {
+// Mobile year style (original size)
+const mobileYearStyle: React.CSSProperties = {
   marginBottom: "0.5rem",
   fontWeight: 700,
   fontSize: "1.1rem",
-  whiteSpace: "nowrap",
+  whiteSpace: "nowrap", // Add this to prevent text wrapping
 }
-const yearDesktop: React.CSSProperties = {
+
+// Desktop year style (smaller size)
+const desktopYearStyle: React.CSSProperties = {
   marginBottom: "0.5rem",
   fontWeight: 700,
   fontSize: "0.9rem",
 }
 
-const roleMobile: React.CSSProperties = { marginTop: "0.5rem", fontSize: "1rem", fontWeight: "bold" }
-const roleDesktop: React.CSSProperties = { marginTop: "0.5rem", fontSize: "0.85rem", fontWeight: "bold" }
+// Update year style for tablet views
+const tabletYearStyle: React.CSSProperties = {
+  marginBottom: "0.5rem",
+  fontWeight: 700,
+  fontSize: "1rem",
+  whiteSpace: "nowrap",
+}
 
-const orgMobile: React.CSSProperties = { fontSize: "0.9rem", fontStyle: "italic", opacity: 0.8 }
-const orgDesktop: React.CSSProperties = { fontSize: "0.75rem", fontStyle: "italic", opacity: 0.8 }
+// Mobile role style (original size)
+const mobileRoleStyle: React.CSSProperties = {
+  marginTop: "0.5rem",
+  fontSize: "1rem",
+  fontWeight: "bold",
+}
+
+// Desktop role style (smaller size)
+const desktopRoleStyle: React.CSSProperties = {
+  marginTop: "0.5rem",
+  fontSize: "0.85rem",
+  fontWeight: "bold",
+}
+
+// Mobile organization style (original size)
+const mobileOrganizationStyle: React.CSSProperties = {
+  fontSize: "0.9rem",
+  fontStyle: "italic",
+  opacity: 0.8,
+}
+
+// Desktop organization style (smaller size)
+const desktopOrganizationStyle: React.CSSProperties = {
+  fontSize: "0.75rem",
+  fontStyle: "italic",
+  opacity: 0.8,
+}
 
 const bulletStyle: React.CSSProperties = {
   display: "flex",
@@ -153,6 +181,7 @@ const bulletStyle: React.CSSProperties = {
   marginBottom: "0.5rem",
 }
 
+// Navigation arrow styles
 const navArrowStyle: React.CSSProperties = {
   position: "absolute",
   top: "50%",
@@ -162,118 +191,122 @@ const navArrowStyle: React.CSSProperties = {
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
-  backgroundColor: "rgba(255,255,255,0.9)",
-  backdropFilter: "blur(4px)",
+  backgroundColor: "rgba(255, 255, 255, 0.8)",
   borderRadius: "50%",
   cursor: "pointer",
   zIndex: 10,
-  boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
+  boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
 }
 
 const CareerTimeline: React.FC = () => {
-  const [showLeftArrow, setShowLeftArrow] = useState(false)
-  const [showRightArrow, setShowRightArrow] = useState(true)
+  const [showLeftArrow, setShowRightArrow] = useState(false)
+  const [showRightArrow, setShowLeftArrow] = useState(true)
   const [isScrollable, setIsScrollable] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [isTablet, setIsTablet] = useState(false)
 
+  // Reference to the scrollable container
   const scrollContainerRef = React.useRef<HTMLDivElement>(null)
 
-  const mobileMinWidthPx =
-    timelineEvents.length * MOBILE_STEP_MIN_PX + (timelineEvents.length - 1) * STEP_GAP_PX
-
+  // Check if timeline is scrollable and update arrow visibility
   const checkScrollability = () => {
     const container = scrollContainerRef.current
-    if (!container) return
-    const mobileView = window.innerWidth < 768
-    setIsMobile(mobileView)
+    if (container) {
+      // Check if we're on mobile or tablet
+      const mobileView = window.innerWidth < 768
+      const tabletView = window.innerWidth >= 768 && window.innerWidth <= 834
 
-    const scrollable = container.scrollWidth > container.clientWidth
-    setIsScrollable(scrollable)
+      setIsMobile(mobileView)
+      setIsTablet(tabletView)
 
-    setShowLeftArrow(container.scrollLeft > 20)
-    setShowRightArrow(container.scrollLeft < container.scrollWidth - container.clientWidth - 20)
+      // Only check scrollability on mobile
+      const isContentScrollable = mobileView && container.scrollWidth > container.clientWidth
+      setIsScrollable(isContentScrollable)
+
+      // Only show arrows if content is scrollable
+      if (isContentScrollable) {
+        setShowLeftArrow(container.scrollLeft > 20)
+        setShowRightArrow(container.scrollLeft < container.scrollWidth - container.clientWidth - 20)
+      } else {
+        setShowLeftArrow(false)
+        setShowRightArrow(false)
+      }
+    }
   }
 
+  // Handle scroll events
+  const handleScroll = () => {
+    checkScrollability()
+  }
+
+  // Check scrollability on mount and resize
   useEffect(() => {
     checkScrollability()
     window.addEventListener("resize", checkScrollability)
     return () => window.removeEventListener("resize", checkScrollability)
   }, [])
 
-  const onScroll = () => checkScrollability()
+  // Scroll left or right
+  const scroll = (direction: "left" | "right") => {
+    const container = scrollContainerRef.current
+    if (container) {
+      const scrollAmount = container.clientWidth / 2
+      const newScrollLeft =
+        direction === "left" ? container.scrollLeft - scrollAmount : container.scrollLeft + scrollAmount
 
-  const scroll = (dir: "left" | "right") => {
-    const el = scrollContainerRef.current
-    if (!el) return
-    const amt = Math.max(el.clientWidth * 0.6, 240)
-    el.scrollTo({ left: el.scrollLeft + (dir === "left" ? -amt : amt), behavior: "smooth" })
+      container.scrollTo({
+        left: newScrollLeft,
+        behavior: "smooth",
+      })
+    }
   }
 
   return (
     <section style={containerStyle} className="career-timeline-container">
+      {/* Add "Full Timeline" heading - only on desktop */}
       {!isMobile && <h3 className="text-base font-medium text-[#0a192f] mb-4 italic">Full Timeline</h3>}
 
-      {isMobile && isScrollable && (
-        <div className="mb-4 text-center text-sm text-gray-500">Scroll for Full Timeline</div>
+      {/* Show scroll indicator only on mobile */}
+      {isScrollable && (
+        <div className="mb-4 text-center text-sm text-gray-500">
+          <span>Scroll for Full Timeline</span>
+        </div>
       )}
 
-      <div className="relative">
-        {/* Desktop/tablet nav buttons */}
-        {!isMobile && isScrollable && (
-          <>
-            {showLeftArrow && (
-              <button
-                aria-label="Scroll left"
-                style={{ ...navArrowStyle, left: "6px" }}
-                onClick={() => scroll("left")}
-              >
-                <ChevronLeft size={22} />
-              </button>
-            )}
-            {showRightArrow && (
-              <button
-                aria-label="Scroll right"
-                style={{ ...navArrowStyle, right: "6px" }}
-                onClick={() => scroll("right")}
-              >
-                <ChevronRight size={22} />
-              </button>
-            )}
-          </>
-        )}
+      {/* Navigation arrows removed */}
 
+      <div className="relative">
         <div
           ref={scrollContainerRef}
-          style={scrollerOuterStyle}
-          onScroll={onScroll}
-          className="overflow-x-auto"
+          style={isMobile ? mobileStepperOuterStyle : desktopStepperOuterStyle}
+          onScroll={handleScroll}
+          className="md:overflow-hidden" // Changed from overflow-visible to overflow-hidden
         >
           <div
-            style={
-              isMobile
-                ? { ...mobileInnerBase, minWidth: `${mobileMinWidthPx}px` }
-                : desktopInnerStyle
-            }
+            style={isMobile ? mobileStepperContainerStyle : desktopStepperContainerStyle}
+            className={isTablet ? "tablet-timeline-container" : ""}
           >
-            {/* Blue line */}
-            <div style={lineStyle} />
+            {/* Horizontal gradient line */}
+            <div style={lineStyle}></div>
 
-            {/* Arrowhead aligned with the line (inside same container) */}
-            <div
-              style={{
-                position: "absolute",
-                top: `${LINE_TOP_PX}px`,
-                right: 0,
-                width: 0,
-                height: 0,
-                borderTop: "6px solid transparent",
-                borderBottom: "6px solid transparent",
-                borderLeft: "10px solid #0046b8",
-                zIndex: 2,
-              }}
-            />
+            {/* Arrowhead at the end of the line - now on both mobile and desktop */}
+            {!isMobile && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50.5px",
+                  right: 0,
+                  width: 0,
+                  height: 0,
+                  borderTop: "6px solid transparent",
+                  borderBottom: "6px solid transparent",
+                  borderLeft: "10px solid #0046b8",
+                  zIndex: 1,
+                }}
+              ></div>
+            )}
 
-            {/* Steps */}
+            {/* Each milestone */}
             {timelineEvents.map((event) => (
               <motion.div
                 key={`${event.year}-${event.role}`}
@@ -283,10 +316,10 @@ const CareerTimeline: React.FC = () => {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
               >
-                <div style={isMobile ? yearMobile : yearDesktop}>{event.year}</div>
+                <div style={isMobile ? mobileYearStyle : desktopYearStyle}>{event.year}</div>
                 <div style={bulletStyle}>{event.icon}</div>
-                <div style={isMobile ? roleMobile : roleDesktop}>{event.role}</div>
-                <div style={isMobile ? orgMobile : orgDesktop}>{event.organization}</div>
+                <div style={isMobile ? mobileRoleStyle : desktopRoleStyle}>{event.role}</div>
+                <div style={isMobile ? mobileOrganizationStyle : desktopOrganizationStyle}>{event.organization}</div>
               </motion.div>
             ))}
           </div>
