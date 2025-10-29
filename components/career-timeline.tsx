@@ -35,9 +35,16 @@ const timelineEvents = [
     icon: <Briefcase className="h-6 w-6 text-white" />,
   },
   {
-    year: "2023 - Present",
+    year: "2023 - 2025",
     role: "Product Owner (Web3)",
     organization: "VUCA Digital",
+    type: "work",
+    icon: <Briefcase className="h-6 w-6 text-white" />,
+  },
+  {
+    year: "2025 - Present",
+    role: "Product Owner (Banking)",
+    organization: "Kiatnakin Phatra Bank",
     type: "work",
     icon: <Briefcase className="h-6 w-6 text-white" />,
   },
