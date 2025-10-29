@@ -1,9 +1,8 @@
 "use client"
 
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { motion } from "framer-motion"
 import { GraduationCap, Briefcase } from "lucide-react"
-import { useState, useEffect } from "react"
 
 const timelineEvents = [
   {
@@ -50,13 +49,13 @@ const timelineEvents = [
   },
 ]
 
-// Animation variants
+// Animations
 const fadeUpVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
 }
 
-// Container styles
+// Container
 const containerStyle: React.CSSProperties = {
   width: "100%",
   maxWidth: "100%",
@@ -66,6 +65,7 @@ const containerStyle: React.CSSProperties = {
   overflowX: "hidden",
 }
 
+// Scroll wrappers
 const mobileStepperOuterStyle: React.CSSProperties = {
   overflowX: "auto",
   WebkitOverflowScrolling: "touch",
@@ -77,38 +77,36 @@ const desktopStepperOuterStyle: React.CSSProperties = {
   overflowX: "hidden",
 }
 
-// Spacing fix: add columnGap
-const mobileStepperContainerStyle: React.CSSProperties = {
+/** 
+ * STEP CONTAINERS
+ * We draw the blue line as a background on the container, so it never gets “broken”.
+ * backgroundSize uses (100% - 10px) so the arrowhead area has space on the right.
+ */
+const baseStepperBg: React.CSSProperties = {
   position: "relative",
   display: "flex",
   justifyContent: "space-between",
   alignItems: "flex-start",
-  minWidth: "800px",
   paddingBottom: "1.5rem",
-  columnGap: "1.25rem", // added
+  columnGap: "1.25rem",
+  backgroundImage: "linear-gradient(to right, #005BE2, #0046b8)",
+  backgroundRepeat: "no-repeat",
+  backgroundSize: "calc(100% - 10px) 3px",
+  backgroundPosition: "0 55px",
+}
+
+const mobileStepperContainerStyle: React.CSSProperties = {
+  ...baseStepperBg,
+  minWidth: "800px",
 }
 
 const desktopStepperContainerStyle: React.CSSProperties = {
-  position: "relative",
-  display: "flex",
-  justifyContent: "space-between",
-  alignItems: "flex-start",
+  ...baseStepperBg,
+  columnGap: "1rem",
   width: "100%",
-  paddingBottom: "1.5rem",
-  columnGap: "1rem", // added
 }
 
-// Line and bullet
-const lineStyle: React.CSSProperties = {
-  position: "absolute",
-  top: "55px",
-  left: 0,
-  right: "10px",
-  height: "3px",
-  background: "linear-gradient(to right, #005BE2, #0046b8)",
-  zIndex: 1,
-}
-
+// Bullet + text
 const bulletStyle: React.CSSProperties = {
   display: "flex",
   justifyContent: "center",
@@ -120,7 +118,6 @@ const bulletStyle: React.CSSProperties = {
   marginBottom: "0.5rem",
 }
 
-// Step styles
 const stepStyleBase: React.CSSProperties = {
   position: "relative",
   display: "flex",
@@ -129,11 +126,10 @@ const stepStyleBase: React.CSSProperties = {
   zIndex: 2,
 }
 
-// Year styles
 const mobileYearStyle: React.CSSProperties = {
   marginBottom: "0.5rem",
   fontWeight: 700,
-  fontSize: "1rem", // slightly smaller
+  fontSize: "1rem",
   whiteSpace: "nowrap",
 }
 
@@ -143,7 +139,6 @@ const desktopYearStyle: React.CSSProperties = {
   fontSize: "0.9rem",
 }
 
-// Role & org
 const mobileRoleStyle: React.CSSProperties = {
   marginTop: "0.5rem",
   fontSize: "1rem",
@@ -179,23 +174,23 @@ const CareerTimeline: React.FC = () => {
 
   const checkScrollability = () => {
     const container = scrollContainerRef.current
-    if (container) {
-      const mobileView = window.innerWidth < 768
-      const tabletView = window.innerWidth >= 768 && window.innerWidth <= 834
+    if (!container) return
 
-      setIsMobile(mobileView)
-      setIsTablet(tabletView)
+    const mobileView = window.innerWidth < 768
+    const tabletView = window.innerWidth >= 768 && window.innerWidth <= 834
 
-      const isContentScrollable = mobileView && container.scrollWidth > container.clientWidth
-      setIsScrollable(isContentScrollable)
+    setIsMobile(mobileView)
+    setIsTablet(tabletView)
 
-      if (isContentScrollable) {
-        setShowLeftArrow(container.scrollLeft > 20)
-        setShowRightArrow(container.scrollLeft < container.scrollWidth - container.clientWidth - 20)
-      } else {
-        setShowLeftArrow(false)
-        setShowRightArrow(false)
-      }
+    const isContentScrollable = mobileView && container.scrollWidth > container.clientWidth
+    setIsScrollable(isContentScrollable)
+
+    if (isContentScrollable) {
+      setShowLeftArrow(container.scrollLeft > 20)
+      setShowRightArrow(container.scrollLeft < container.scrollWidth - container.clientWidth - 20)
+    } else {
+      setShowLeftArrow(false)
+      setShowRightArrow(false)
     }
   }
 
@@ -209,15 +204,13 @@ const CareerTimeline: React.FC = () => {
 
   const scroll = (direction: "left" | "right") => {
     const container = scrollContainerRef.current
-    if (container) {
-      const scrollAmount = container.clientWidth / 2
-      const newScrollLeft =
-        direction === "left" ? container.scrollLeft - scrollAmount : container.scrollLeft + scrollAmount
-      container.scrollTo({ left: newScrollLeft, behavior: "smooth" })
-    }
+    if (!container) return
+    const scrollAmount = container.clientWidth / 2
+    const newScrollLeft =
+      direction === "left" ? container.scrollLeft - scrollAmount : container.scrollLeft + scrollAmount
+    container.scrollTo({ left: newScrollLeft, behavior: "smooth" })
   }
 
-  // Computed step width based on viewport
   const computedStepStyle: React.CSSProperties = {
     ...stepStyleBase,
     minWidth: isMobile ? 148 : isTablet ? 132 : 120,
@@ -245,8 +238,7 @@ const CareerTimeline: React.FC = () => {
             style={isMobile ? mobileStepperContainerStyle : desktopStepperContainerStyle}
             className={isTablet ? "tablet-timeline-container" : ""}
           >
-            <div style={lineStyle}></div>
-
+            {/* Arrowhead (desktop only) */}
             {!isMobile && (
               <div
                 style={{
@@ -260,9 +252,10 @@ const CareerTimeline: React.FC = () => {
                   borderLeft: "10px solid #0046b8",
                   zIndex: 1,
                 }}
-              ></div>
+              />
             )}
 
+            {/* Steps */}
             {timelineEvents.map((event) => (
               <motion.div
                 key={`${event.year}-${event.role}`}
