@@ -15,7 +15,7 @@ export const SITE_METADATA = {
     url: "/profile-image.png",
     width: 1200,
     height: 630,
-    alt: "Tapanat Chaigosi - Product Manager",
+    alt: "Tapanat Chaigosi - Product Owner",
   },
   locale: "en_US",
 } as const
