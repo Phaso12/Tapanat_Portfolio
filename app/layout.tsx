@@ -3,37 +3,35 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+import { SITE_METADATA } from "@/lib/constants"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Tapanat Chaigosi | Product Manager",
-  description:
-    "A product manager with a strong focus on building scalable systems at the intersection of finance and technology. I specialize in data-driven product development, particularly in FinTech and Web3, where I combine product strategy, technical insight, and execution to create meaningful solutions.",
+  title: SITE_METADATA.title,
+  description: SITE_METADATA.description,
   generator: "v0.app",
   openGraph: {
-    title: "Tapanat Chaigosi | Product Manager",
-    description:
-      "A product manager with a strong focus on building scalable systems at the intersection of finance and technology. I specialize in data-driven product development, particularly in FinTech and Web3, where I combine product strategy, technical insight, and execution to create meaningful solutions.",
-    url: "https://tapanat-portfolio.vercel.app/",
-    siteName: "Tapanat Chaigosi Portfolio",
+    title: SITE_METADATA.title,
+    description: SITE_METADATA.description,
+    url: SITE_METADATA.url,
+    siteName: SITE_METADATA.siteName,
     images: [
       {
-        url: "/profile-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Tapanat Chaigosi - Product Manager",
+        url: SITE_METADATA.image.url,
+        width: SITE_METADATA.image.width,
+        height: SITE_METADATA.image.height,
+        alt: SITE_METADATA.image.alt,
       },
     ],
-    locale: "en_US",
+    locale: SITE_METADATA.locale,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tapanat Chaigosi | Product Manager",
-    description:
-      "A product manager with a strong focus on building scalable systems at the intersection of finance and technology. I specialize in data-driven product development, particularly in FinTech and Web3, where I combine product strategy, technical insight, and execution to create meaningful solutions.",
-    images: ["/profile-image.png"],
+    title: SITE_METADATA.title,
+    description: SITE_METADATA.description,
+    images: [SITE_METADATA.image.url],
   },
 }
 
