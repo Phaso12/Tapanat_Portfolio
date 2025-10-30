@@ -257,17 +257,17 @@ const CareerTimeline: React.FC = () => {
                 >
                   {/* Desktop-only special wrapping rules */}
                   {!isMobile && !isTablet ? (
-                    event.organization === "Kiatnakin Phatra Financial Group" ? (
-                      <>
-                        Kiatnakin Phatra
-                        <br />
-                        <span style={{ whiteSpace: "nowrap" }}>Financial Group</span>
-                      </>
-                    ) : event.organization === "Thai-Nichi Institute of Technology" ? (
+                    event.organization === "Thai-Nichi Institute of Technology" ? (
                       <>
                         Thai-Nichi Institute
                         <br />
                         <span style={{ whiteSpace: "nowrap" }}>of Technology</span>
+                      </>
+                    ) : event.organization === "Kiatnakin Phatra Financial Group" ? (
+                      <>
+                        Kiatnakin Phatra
+                        <br />
+                        <span style={{ whiteSpace: "nowrap" }}>Financial Group</span>
                       </>
                     ) : (
                       event.organization
