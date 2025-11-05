@@ -39,7 +39,7 @@ export function ProjectCard({
       className="group"
       whileHover={{ y: -8 }}
     >
-      <Link href={`/projects/${slug}`} className="block h-full" scroll={true}>
+      <Link href={`/projects/${slug}`} className="block h-full" scroll={true} target="_blank" rel="noopener noreferrer">
         <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-all duration-300 h-full flex flex-col cursor-pointer">
           <div className="relative h-40 sm:h-44 md:h-48 w-full overflow-hidden">
             {customImage ? (
