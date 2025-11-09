@@ -43,7 +43,7 @@ const timelineEvents = [
   {
     year: "2025 - Present",
     role: "Product Owner (Banking)",
-    organization: "Kiatnakin Phatra Financial Group",
+    organization: "Kiatnakin Phatra Securities",
     type: "work",
     icon: <Briefcase className="h-6 w-6 text-white" />,
   },
@@ -263,11 +263,11 @@ const CareerTimeline: React.FC = () => {
                         <br />
                         <span style={{ whiteSpace: "nowrap" }}>of Technology</span>
                       </>
-                    ) : event.organization === "Kiatnakin Phatra Financial Group" ? (
+                    ) : event.organization === "Kiatnakin Phatra Securities" ? (
                       <>
                         Kiatnakin Phatra
                         <br />
-                        <span style={{ whiteSpace: "nowrap" }}>Financial Group</span>
+                        <span style={{ whiteSpace: "nowrap" }}>Securities</span>
                       </>
                     ) : (
                       event.organization
